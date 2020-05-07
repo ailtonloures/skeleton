@@ -109,3 +109,18 @@ if (!function_exists('pdf')) {
         return new \App\Services\PDF($filename, $paper, $orientation, $options);
     }
 }
+
+if(!function_exists('response')) {
+    /**
+     * @return \App\Services\Response
+     */
+    function response() : \App\Services\Response
+    {
+        $slim = new \App\Services\Slim;
+        $response = new \App\Services\Response;
+
+        $response->setViewer($slim->getContainer()->get('view'));
+
+        return $response;
+    }
+}

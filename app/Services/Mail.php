@@ -119,7 +119,7 @@ final class Mail
      */
     public function view(string $path, array $data = []) : Mail
     {
-        $this->mail->Body = (new Response)->content($path, $data);
+        $this->mail->Body = response()->content($path, $data);
         return $this;
     }
 

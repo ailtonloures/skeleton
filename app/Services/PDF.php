@@ -29,6 +29,17 @@ final class PDF
     }
 
     /**
+     * @param string $path
+     * @param array $data
+     * @return PDF
+     */
+    public function loadView(string $path, array $data = []) : PDF
+    {
+        $this->pdf->loadHtml(response()->content($path, $data));
+        return $this;
+    }
+
+    /**
      * @return void
      */
     public function render(): void
