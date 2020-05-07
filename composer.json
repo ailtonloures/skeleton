@@ -1,0 +1,37 @@
+{
+    "name": "ailtonloures/base-structure",
+    "description": "Estrutura básica para aplicações em PHP 7",
+    "version": "dev-master",
+    "homepage": "https://github.com/ailtonloures/base-structure.git",
+    "authors": [
+        {
+            "name": "Ailton Loures Ferreira"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": "^7.2",
+        "slim/slim": "3.*",
+        "vlucas/phpdotenv": "^4.1",
+        "phpmailer/phpmailer": "^6.1",
+        "slim/php-view": "^2.2",
+        "tuupola/cors-middleware": "^1.1",
+        "tuupola/slim-jwt-auth": "^3.4",
+        "pusher/pusher-php-server": "^4.1",
+        "matthiasmullie/minify": "^1.3",
+        "dompdf/dompdf": "^0.8.5",
+        "coffeecode/optimizer": "^2.0",
+        "nesbot/carbon": "^2.30"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app"
+        },
+        "files": [
+            "app/Helpers/functions.php"
+        ]
+    }
+}
