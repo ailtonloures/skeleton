@@ -21,7 +21,8 @@
         "matthiasmullie/minify": "^1.3",
         "dompdf/dompdf": "^0.8.5",
         "coffeecode/optimizer": "^2.0",
-        "nesbot/carbon": "^2.30"
+        "nesbot/carbon": "^2.30",
+        "league/oauth2-google": "^3.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.1"

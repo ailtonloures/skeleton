@@ -80,6 +80,27 @@ if (!function_exists('session')) {
     }
 }
 
+if (!function_exists('session_flush')) {
+    /**
+     * @param string|array $keys
+     * @return void
+     */
+    function session_flush($keys = null) : void
+    {
+        if(is_string($keys) && !empty($_SESSION[$keys])) {
+            unset($_SESSION[$keys]);
+        } else if(is_array($keys)) {
+            foreach($keys as $key) {
+                if(!empty($_SESSION[$key])) {
+                    unset($_SESSION[$key]);
+                }
+            }
+        }
+
+        return;
+    }
+}
+
 if (!function_exists('notification')) {
     /**
      * @return \App\Services\Notification
