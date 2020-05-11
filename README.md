@@ -2,10 +2,10 @@
 
 ## Instalação
 
-Abra o terminal e clone o repositório.
+Abra o terminal e clone o repositório. Substitua "my-project" pelo nome do seu projeto.
 
 ```
-git clone https://github.com/ailtonloures/base-structure.git your-project
+git clone https://github.com/ailtonloures/base-structure.git my-project
 ```
 
 Ainda no terminal, faça a instalação das depedências usando o composer.
@@ -21,7 +21,7 @@ Após a instalação das dependências, copie e cole o arquivo .env.example e re
 ``` 
 # App
 APP_NAME=YourApp
-APP_HOST=http://localhost:80/
+APP_HOST=http://localhost
 APP_PATH=public
 APP_LOCALE=pt_BR
 
@@ -72,9 +72,17 @@ Após ter realizado todas as configurações acima, suba o seu servidor apache (
 A porta pode ser de sua preferência ou a porta que estiver disponível em seu servidor, mas por padrão, de exemplo será a porta 80.
 
 ```
-php -S localhost:80 -t public
+composer start
 ```
 
-Este comando irá subir um servidor local na porta 80, basta abrir o navegador e acessar http://localhost:80
+Este comando irá subir um servidor local na porta 80, basta abrir o navegador e acessar http://localhost
+
+## Testes
+
+Para executar os testes unitários, execute o comando:
+
+```
+composer test
+```
 
 Divirta-se!

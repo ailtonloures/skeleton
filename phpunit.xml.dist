@@ -12,7 +12,7 @@
     stopOnFailure="false"
     verbose="false">
     <testsuites>
-        <testsuite name="SlimDataLayer">
+        <testsuite name="unit-tests">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>

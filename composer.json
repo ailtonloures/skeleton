@@ -29,10 +29,19 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app"
+            "App\\": "app/"
         },
         "files": [
-            "app/Helpers/helpers.php"
+            "app/Helpers/functions.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\" : "tests/"
+        }
+    },
+    "scripts": {
+        "start" : "php -S localhost:80 -t public",
+        "test" : "phpunit"
     }
 }
