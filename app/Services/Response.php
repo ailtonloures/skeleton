@@ -68,7 +68,7 @@ class Response extends HttpResponse
      */
     public function json($data, int $code = 200): Response
     {
-        return $this->withStatus($code)->withJson(['data' => $data]);
+        return $this->withStatus($code)->withJson($data);
     }
 
     /**

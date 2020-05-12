@@ -24,12 +24,10 @@ final class AuthMiddleware
             $now          = Carbon::now()->format('Y-m-d H:i:s');
 
             if ($tokenExpired < $now) {
-                return $response->withStatus(401);
+                return $response->error("Sessão expirada", 401);
             }
-
-        } else {
-            
-            return $response->withStatus(401);
+        } else {            
+            return $response->error("Token inválido", 401);
         }
 
         $response = $next($request, $response);
