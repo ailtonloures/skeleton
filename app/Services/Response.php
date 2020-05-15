@@ -80,18 +80,4 @@ class Response extends HttpResponse
     {
         return $this->json(['error' => $data], $code);
     }
-
-    /**
-     * @param string $path
-     * @param integer $code
-     * @return Response
-     */
-    public function redirect(string $path, array $params = [], int $code = 302): Response
-    {
-        if (!empty($params)) {
-            $path .= "?" . http_build_query($params);
-        }
-
-        return $this->withRedirect($path, $code);
-    }
 }

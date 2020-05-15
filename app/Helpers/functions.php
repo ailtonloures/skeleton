@@ -101,6 +101,16 @@ if (!function_exists('session_flush')) {
     }
 }
 
+if (!function_exists('slim')) {
+    /**
+     * @return \App\Services\Slim;
+     */
+    function slim(): \App\Services\Slim
+    {
+        return new \App\Services\Slim;
+    }
+}
+
 if (!function_exists('notification')) {
     /**
      * @return \App\Services\Notification
@@ -137,11 +147,16 @@ if(!function_exists('response')) {
      */
     function response() : \App\Services\Response
     {
-        $slim = new \App\Services\Slim;
-        $response = new \App\Services\Response;
+        return slim()->getContainer()->get('response');
+    }
+}
 
-        $response->setViewer($slim->getContainer()->get('view'));
-
-        return $response;
+if(!function_exists('redirect')) {
+    /**
+     * @return \App\Services\Redirect
+     */
+    function redirect() : \App\Services\Redirect
+    {
+        return slim()->getContainer()->get('redirect');
     }
 }

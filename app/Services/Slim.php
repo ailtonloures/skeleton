@@ -37,6 +37,9 @@ final class Slim extends App
                 'displayErrorDetails'    => ($_SERVER["SERVER_NAME"] == "localhost") ? getenv('DISPLAY_ERROR_DETAILS') : false,
                 'addContentLengthHeader' => getenv('ADD_CONTENT_LENGTH_HEADER'),
             ],
+            'foundHandler' => function () {
+                return new RequestResponseArgs();
+            },
             'view'         => function () {
                 $view = new PhpRenderer(__DIR__ . '/../../templates/views/');
                 $view->setLayout('index.phtml');
@@ -48,9 +51,11 @@ final class Slim extends App
                 $response->setViewer($container->get('view'));
 
                 return $response;
-            },
-            'foundHandler' => function () {
-                return new RequestResponseArgs();
+            },            
+            'redirect'     => function (Container $container) {
+                $redirect = new Redirect($container);
+
+                return $redirect;
             },
         ];
     }

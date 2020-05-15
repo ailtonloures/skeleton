@@ -32,21 +32,21 @@ class AuthController
 
             flash('error', 'Você precisa de autorização para continuar.');
 
-            return $response->redirect('/');
+            return redirect()->url('/');
 
         } else if (!$code) {
 
             $authUrl = $provider->getAuthorizationUrl(); // Retorna a url de autenticação
             session('oauth2state', $provider->getState()); // Seta o status na sessão
 
-            return $response->redirect($authUrl); // Redireciona para a url de autenticação
+            return redirect()->url($authUrl); // Redireciona para a url de autenticação
 
         } elseif (!$state || $state !== session('oauth2state')) { // Verifica se o status é válido
 
             session_flush('oauth2state');
             flash('error', 'Falha ao tentar se autenticar com a Google');
 
-            return $response->redirect('/'); // Redireciona para a página inicial
+            return redirect()->url('/'); // Redireciona para a página inicial
         }
 
         $token = $provider->getAccessToken("authorization_code", ['code' => $code]); // Recupera o token da sessão
@@ -60,6 +60,6 @@ class AuthController
 
         flash('success', 'Login efetuado com sucesso!');
 
-        return $response->redirect('/');
+        return redirect()->url('/');
     }
 }
