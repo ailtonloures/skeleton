@@ -45,6 +45,7 @@ class Response extends HttpResponse
 
     /**
      * @param string $path
+     * @param array $data
      * @return HttpResponse
      */
     public function view(string $path, array $data = []): HttpResponse
@@ -54,6 +55,7 @@ class Response extends HttpResponse
 
     /**
      * @param string $path
+     * @param array $data
      * @return mixed
      */
     public function content(string $path, array $data = [])

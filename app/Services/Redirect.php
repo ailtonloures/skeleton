@@ -17,6 +17,7 @@ class Redirect
 
     /**
      * @param string $path
+     * @param array $params
      * @param integer $code
      * @return Response
      */
