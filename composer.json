@@ -22,7 +22,8 @@
         "dompdf/dompdf": "^0.8.5",
         "coffeecode/optimizer": "^2.0",
         "nesbot/carbon": "^2.30",
-        "league/oauth2-google": "^3.0"
+        "league/oauth2-google": "^3.0",
+        "league/event": "^2.2"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.1"

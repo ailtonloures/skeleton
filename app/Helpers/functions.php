@@ -103,11 +103,11 @@ if (!function_exists('session_flush')) {
 
 if (!function_exists('slim')) {
     /**
-     * @return \App\Services\Slim;
+     * @return \App\Providers\SlimProvider
      */
-    function slim(): \App\Services\Slim
+    function slim(): \App\Providers\SlimProvider
     {
-        return new \App\Services\Slim;
+        return new \App\Providers\SlimProvider;
     }
 }
 
@@ -158,5 +158,15 @@ if(!function_exists('redirect')) {
     function redirect() : \App\Services\Redirect
     {
         return slim()->getContainer()->get('redirect');
+    }
+}
+
+if(!function_exists('event')) {
+    /**
+     * @return \League\Event\Emitter
+     */
+    function event() : \League\Event\Emitter
+    {
+        return slim()->getContainer()->get('emitter');
     }
 }

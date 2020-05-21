@@ -10,7 +10,7 @@ class Controller
     public function index(Request $request, Response $response)
     {
         $response->addData('msg', "Hello world");
-                
+
         return $response->view('home');
     }
 }

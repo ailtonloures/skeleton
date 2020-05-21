@@ -1,8 +1,11 @@
 <?php
 
-namespace App\Services;
+namespace App\Providers;
 
+use App\Providers\EventProvider;
+use App\Services\Redirect;
 use App\Services\Response;
+use League\Event\Emitter;
 use Slim\App;
 use Slim\Container;
 use Slim\Handlers\Strategies\RequestResponseArgs;
@@ -10,7 +13,7 @@ use Slim\Views\PhpRenderer;
 use Tuupola\Middleware\CorsMiddleware;
 use Tuupola\Middleware\JwtAuthentication;
 
-final class Slim extends App
+final class SlimProvider extends App
 {
     public function __construct()
     {
@@ -51,11 +54,17 @@ final class Slim extends App
                 $response->setViewer($container->get('view'));
 
                 return $response;
-            },            
+            },
             'redirect'     => function (Container $container) {
                 $redirect = new Redirect($container);
 
                 return $redirect;
+            },
+            'emitter'      => function () {
+                $emitter = new Emitter;
+                $emitter->useListenerProvider(new EventProvider);
+
+                return $emitter;
             },
         ];
     }
