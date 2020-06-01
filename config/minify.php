@@ -2,9 +2,7 @@
 
 if ($_SERVER["SERVER_NAME"] == "localhost") {
 
-    /**
-     * CSS Minify
-     */
+    // CSS Minify
     $cssDirName = dirname(__DIR__, 1) . '/templates/assets/css/';
     $cssDir     = dir($cssDirName);
     $minCSS     = new \MatthiasMullie\Minify\CSS();
@@ -17,9 +15,7 @@ if ($_SERVER["SERVER_NAME"] == "localhost") {
         }
     }
 
-    /**
-     * JS Minify
-     */
+    // JS Minify
     $jsDirName = dirname(__DIR__, 1) . '/templates/assets/js/';
     $jsDir     = dir($jsDirName);
     $minJS     = new \MatthiasMullie\Minify\JS();
