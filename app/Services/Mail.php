@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Exception;
-use App\Services\Response;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\PHPMailer;
 
@@ -13,6 +12,9 @@ final class Mail
      * @var PHPMailer
      */
     private $mail;
+
+    /** @var Exception */
+    private $error;
 
     public function __construct()
     {
@@ -142,8 +144,16 @@ final class Mail
             $this->mail->send();
             return true;
         } catch (Exception $exception) {
-            throw new Exception($exception);
+            $this->error = $exception;
             return false;
         }
+    }
+
+    /**
+     * @return Exception
+     */
+    public function getError() : Exception
+    {
+        return $this->error;
     }
 }
