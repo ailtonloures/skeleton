@@ -61,12 +61,12 @@ final class File
 
     /**
      * @param string|null $path
-     * @param string|null $as
+     * @param string|null $newFileName
      * @return void
      */
-    public function store(?string $path = null, ?string $as = null): void
+    public function store(?string $path = null, ?string $newFileName = null): void
     {
-        $this->uploadedFile->moveTo($this->pathUpload . ("/{$path}" ?: null) . ("/{$as}" ?: "/{$this->fileName()}"));
+        $this->uploadedFile->moveTo($this->pathUpload . ("/{$path}" ?: null) . ("/{$newFileName}" ?: "/{$this->fileName()}"));
     }
 
     /**
