@@ -2,13 +2,15 @@
 
 namespace App\Services;
 
-use Exception;
 use Slim\Http\UploadedFile;
 
 final class File
 {
-    /** @var UploadedFile */
+    /** @var UploadedFile $uploadedFile */
     private $uploadedFile;
+
+    /** @var string $pathFile */
+    private $pathUpload = __DIR__ . "/../../public/assets/";
 
     public function __construct(UploadedFile $uploadedFile)
     {
@@ -61,7 +63,7 @@ final class File
      */
     public function store(?string $pathName = null): void
     {
-        $this->uploadedFile->moveTo(__DIR__ . '/../../public/assets/' . (!empty($pathName) ? $pathName : $this->filename()));
+        $this->uploadedFile->moveTo($this->pathUpload . (!empty($pathName) ? $pathName : $this->filename()));
     }
 
     /**
@@ -70,7 +72,7 @@ final class File
      */
     public static function delete(string $pathName) : bool
     {
-        return unlink(__DIR__ . '/../../tmp/' . $pathName);
+        return unlink($this->pathUpload . $pathName);
     }
 
     /**
@@ -88,15 +90,10 @@ final class File
     }
 
     /**
-     * @param UploadedFile $uploadedFile
-     * @return boolean
+     * @return integer
      */
-    private function error(UploadedFile $uploadedFile): bool
+    private function getError() : int
     {
-        if ($uploadedFile->getError() === UPLOAD_ERR_OK) {
-            return true;
-        }
-
-        return false;
+        return $this->uploadedFile->getError();
     }
 }
