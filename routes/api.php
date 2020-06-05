@@ -1,6 +1,6 @@
 <?php
 
-/** @var \App\Services\Slim $router */
+/** @var \App\Providers\SlimProvider $router */
 
 $router->get('', function() {
    return response()->json('Hello world');

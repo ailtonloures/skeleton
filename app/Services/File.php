@@ -4,13 +4,15 @@ namespace App\Services;
 
 use Slim\Http\UploadedFile;
 
+use function PHPUnit\Framework\directoryExists;
+
 final class File
 {
     /** @var UploadedFile $uploadedFile */
     private $uploadedFile;
 
     /** @var string $pathFile */
-    private $pathUpload = __DIR__ . "/../../public/assets/";
+    private $pathUpload = __DIR__ . "/../../public/assets";
 
     public function __construct(UploadedFile $uploadedFile)
     {
@@ -44,7 +46,7 @@ final class File
     /**
      * @return string|null
      */
-    public function filename(): ?string
+    public function fileName(): ?string
     {
         return $this->uploadedFile->getClientFilename() ?? null;
     }
@@ -52,27 +54,28 @@ final class File
     /**
      * @return object|null
      */
-    public function stream() : ?object 
+    public function stream(): ?object
     {
         return $this->uploadedFile->getStream();
     }
-    
+
     /**
-     * @param string|null $pathName
+     * @param string|null $path
+     * @param string|null $as
      * @return void
      */
-    public function store(?string $pathName = null): void
+    public function store(?string $path = null, ?string $as = null): void
     {
-        $this->uploadedFile->moveTo($this->pathUpload . (!empty($pathName) ? $pathName : $this->filename()));
+        $this->uploadedFile->moveTo($this->pathUpload . ("/{$path}" ?: null) . ("/{$as}" ?: "/{$this->fileName()}"));
     }
 
     /**
-     * @param string $pathName
+     * @param string $path
      * @return boolean
      */
-    public static function delete(string $pathName) : bool
+    public function delete(string $path): bool
     {
-        return unlink($this->pathUpload . $pathName);
+        return unlink("{$this->pathUpload}/{$path}");
     }
 
     /**
@@ -92,7 +95,7 @@ final class File
     /**
      * @return integer
      */
-    private function getError() : int
+    private function getError(): int
     {
         return $this->uploadedFile->getError();
     }

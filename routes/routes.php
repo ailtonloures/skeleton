@@ -3,7 +3,7 @@
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Controller;
 
-/** @var \App\Services\Slim $router */
+/** @var \App\Providers\SlimProvider $router */
 
 $router->get('/', Controller::class .':index');
 
