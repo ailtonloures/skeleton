@@ -6,16 +6,18 @@ use Dompdf\Dompdf;
 
 final class PDF
 {
-    /** @var Dompdf */
+    /** @var Dompdf $pdf */
     protected $pdf;
 
-    /** @var string */
-    protected $filename;
+    /** @var string $fileName */
+    protected $fileName;
 
-    public function __construct(string $filename = 'document.pdf', string $paper = 'A4', string $orientation = 'portrait', $options = null)
+    public function __construct(string $fileName = 'document.pdf', string $paper = 'A4', string $orientation = 'portrait', $options = null)
     {
         $this->pdf = new Dompdf($options);
         $this->pdf->setPaper($paper, $orientation);
+
+        $this->fileName = $fileName;
     }
 
     /**
@@ -45,7 +47,7 @@ final class PDF
     public function render(): void
     {
         $this->pdf->render();
-        $this->pdf->stream($this->filename, ["Attachment" => false]);
+        $this->pdf->stream($this->fileName, ["Attachment" => false]);
     }
 
     /**
@@ -54,7 +56,7 @@ final class PDF
     public function download(): void
     {
         $this->pdf->render();
-        $this->pdf->stream($this->filename);
+        $this->pdf->stream($this->fileName);
     }
 
 }

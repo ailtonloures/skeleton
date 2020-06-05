@@ -8,12 +8,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 final class Mail
 {
-    /**
-     * @var PHPMailer
-     */
+    /** @var PHPMailer $mail */
     private $mail;
 
-    /** @var Exception */
+    /** @var Exception $error */
     private $error;
 
     public function __construct()
