@@ -1,6 +1,6 @@
 .env
-composer.lock
 
 /tmp/
 
 /vendor/
+/node_modules/
