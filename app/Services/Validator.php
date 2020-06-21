@@ -56,6 +56,9 @@ final class Validator
         return null;
     }
 
+    /**
+     * @return boolean
+     */
     public static function valid() : bool
     {
         if(empty(self::messages())) {

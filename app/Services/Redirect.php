@@ -7,7 +7,7 @@ use App\Services\Response;
 
 class Redirect 
 {  
-    /** @var Response */
+    /** @var Response $response */
     private $response;
 
     public function __construct(Container $container)

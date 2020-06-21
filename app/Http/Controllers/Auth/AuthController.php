@@ -9,7 +9,7 @@ use League\OAuth2\Client\Provider\Google;
 class AuthController
 {   
     /**
-     * Autenticação OAuth2 Google
+     * Authentication Google OAuth2 
      *
      * @param Request $request
      * @param Response $response
@@ -17,7 +17,6 @@ class AuthController
      */
     public function googleLogin(Request $request, Response $response) : Response
     {   
-        /** Acessar o console da google e colocar as informações necessárias aqui */
         $provider = new Google([
             'clientId'     => '',
             'clientSecret' => '',
@@ -30,35 +29,35 @@ class AuthController
 
         if ($error) {
 
-            flash('error', 'Você precisa de autorização para continuar.');
+            flash('error', 'You need authorization to continue.');
 
             return redirect()->url('/');
 
         } else if (!$code) {
 
-            $authUrl = $provider->getAuthorizationUrl(); // Retorna a url de autenticação
-            session('oauth2state', $provider->getState()); // Seta o status na sessão
+            $authUrl = $provider->getAuthorizationUrl();
+            session('oauth2state', $provider->getState());
 
-            return redirect()->url($authUrl); // Redireciona para a url de autenticação
+            return redirect()->url($authUrl);
 
-        } elseif (!$state || $state !== session('oauth2state')) { // Verifica se o status é válido
+        } elseif (!$state || $state !== session('oauth2state')) {
 
             session_flush('oauth2state');
-            flash('error', 'Falha ao tentar se autenticar com a Google');
+            flash('error', 'Connectio failed.');
 
-            return redirect()->url('/'); // Redireciona para a página inicial
+            return redirect()->url('/');
         }
 
-        $token = $provider->getAccessToken("authorization_code", ['code' => $code]); // Recupera o token da sessão
+        $token = $provider->getAccessToken("authorization_code", ['code' => $code]);
 
         /** @var \League\OAuth2\Client\Provider\GoogleUser $user */
-        $user = $provider->getResourceOwner($token); // Retorna as informações do usuário
+        $user = $provider->getResourceOwner($token);
 
         session('user_email', $user->getEmail());
         session('user_name', $user->getName());
         session('user', $user->getId());
 
-        flash('success', 'Login efetuado com sucesso!');
+        flash('success', 'Login success.');
 
         return redirect()->url('/');
     }

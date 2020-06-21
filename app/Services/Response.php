@@ -7,10 +7,10 @@ use Slim\Views\PhpRenderer;
 
 class Response extends HttpResponse
 {
-    /** @var PhpRenderer */
+    /** @var PhpRenderer $view */
     private $view;
 
-    /** @var array */
+    /** @var array $data */
     private $data;
 
     /**

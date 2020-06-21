@@ -6,7 +6,7 @@ use CoffeeCode\Optimizer\Optimizer;
 
 final class SEO
 {
-    /** @var Optimizer */
+    /** @var Optimizer $optimizer */
     protected $optimizer;
 
     public function __construct(string $schema = "article")

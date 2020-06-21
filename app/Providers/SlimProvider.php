@@ -19,15 +19,7 @@ final class SlimProvider extends App
     {
         parent::__construct($this->config());
 
-        /*
-        /-----------------------
-        /
-        / Middlewares globais serão adicionadas aqui
-        /
-        /-----------------------
-         */
-        $this->add(new JwtAuthentication($this->jwt())); // Verifica se o Token é válido
-        $this->add(new CorsMiddleware($this->cors())); // Valida o CORS da requisição
+        $this->middlewares();
     }
 
     /**
@@ -70,6 +62,15 @@ final class SlimProvider extends App
     }
 
     /**
+     * @return void
+     */
+    private function middlewares(): void
+    {
+        $this->add(new JwtAuthentication($this->auth_api()));
+        $this->add(new CorsMiddleware($this->cors()));
+    }
+
+    /**
      * @return array
      */
     private function cors(): array
@@ -87,7 +88,7 @@ final class SlimProvider extends App
     /**
      * @return array
      */
-    private function jwt(): array
+    private function auth_api(): array
     {
         return [
             "path"      => [], // Irá validar tudo a parrtir desta rota
