@@ -8,8 +8,9 @@
             "email": "ailton.loures99@gmail.com"
         }
     ],
-    "minimun-stability": "stable",
     "license": "ISC",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^7.2",
         "slim/slim": "3.*",
@@ -45,6 +46,9 @@
     },
     "scripts": {
         "start": "php -S localhost:80 -t public",
-        "test": "phpunit"
+        "test": "phpunit",
+        "post-root-package-install": [
+            "cp env.example .env"
+        ]
     }
 }
