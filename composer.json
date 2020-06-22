@@ -8,6 +8,7 @@
             "email": "ailton.loures99@gmail.com"
         }
     ],
+    "minimun-stability": "stable",
     "license": "ISC",
     "require": {
         "php": "^7.2",
