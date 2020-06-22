@@ -48,7 +48,7 @@
         "start": "php -S localhost:80 -t public",
         "test": "phpunit",
         "post-root-package-install": [
-            "@php -r \"copy('.env.example', '.env');\""
+            "@php -r \"file_exists('.env.example') && copy('.env.example', '.env');\""
         ]
     }
 }
