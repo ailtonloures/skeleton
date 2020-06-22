@@ -26,7 +26,8 @@
         "nesbot/carbon": "^2.30",
         "league/oauth2-google": "^3.0",
         "league/event": "^2.2",
-        "league/pipeline": "^1.0"
+        "league/pipeline": "^1.0",
+        "ailtonloures/validator": "^1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.1"

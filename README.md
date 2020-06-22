@@ -51,7 +51,7 @@ composer test
 - FileSystem
 - PDF - [DOMPdf](https://github.com/dompdf/dompdf)
 - SEO - [Optmizer](https://github.com/robsonvleite/optimizer)
-- Validator
+- Validator - [Documentação](https://github.com/ailtonloures/validator)
 - Notification - [Pusher](https://github.com/pusher/pusher-http-php)
 - Response
 - Template Enginer - [PHP-View](https://github.com/slimphp/PHP-View)
