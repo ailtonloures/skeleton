@@ -2,7 +2,7 @@
 
 ## Sobre
 
-É um projeto totalmente livre, não é literalmente é framework e sim uma estrutura pronta e padronizada pra quem prefere no seu dia a dia 
+É um projeto totalmente livre, não é literalmente um framework e sim uma estrutura pronta e padronizada pra quem prefere no seu dia a dia 
 trabalhar com a linguagem PHP sem o uso de framework e ficar preso a isso. 
 Cada arquivo, classes e etc, podem ser alterados por você para melhorar e adaptar da melhor forma e adequada ao seu projeto, 
 ou você pode contribuir com novas features, correções de bugs, e outros que você achar que pode ser melhorado para ideia do projeto inicial.
