@@ -1,70 +1,26 @@
 # Base-Structure
 
+## Sobre
+
+É um projeto totalmente livre, não é literalmente é framework e sim uma estrutura pronta e padronizada pra quem prefere no seu dia a dia 
+trabalhar com a linguagem PHP sem o uso de framework e ficar preso a isso. 
+Cada arquivo, classes e etc, podem ser alterados por você para melhorar e adaptar da melhor forma e adequada ao seu projeto, 
+ou você pode contribuir com novas features, correções de bugs, e outros que você achar que pode ser melhorado para ideia do projeto inicial.
+
+## Requisitos
+
+Requisitos obrigatórios para o funcionamento do projeto
+
+- Composer
+- PHP ^7.2
+
 ## Instalação
 
-Abra o terminal e clone o repositório. Substitua "my-project" pelo nome do seu projeto.
+Com o composer instalado na sua máquina, execute o comando abaixo:
 
 ```
-git clone https://github.com/ailtonloures/base-structure.git my-project
+composer create-project --prefer-dist --stability dev ailtonloures/base-structure [app_name]
 ```
-
-Ainda no terminal, faça a instalação das depedências usando o composer.
-
-```
-composer install
-```
-
-## Configuração
-
-Após a instalação das dependências, copie e cole o arquivo .env.example e renomeie para .env.
-
-``` 
-# App
-APP_NAME=YourApp
-APP_HOST=http://localhost
-APP_PATH=public
-APP_LOCALE=pt_BR
-
-# Slim
-DISPLAY_ERROR_DETAILS=true
-ADD_CONTENT_LENGTH_HEADER=false
-
-# Database
-DB_DRIVER=
-DB_HOST=
-DB_NAME=
-DB_PORT=
-DB_USERNAME=
-DB_PASSWORD=
-
-# Mail
-MAIL_HOST=
-MAIL_USERNAME=
-MAIL_PASSWORD=
-MAIL_PORT=
-MAIL_CRYPT=
-MAIL_FROM=
-MAIL_NAME=
-
-# Auth
-JWT_SECRET_KEY=
-
-# Pusher
-CLUSTER=
-AUTH_KEY=
-SECRET=
-APP_ID=
-MASTER_KEY=
-
-# SEO & SMO
-FB_PAGE=
-FB_AUTHOR=
-FB_APP_ID=
-TWITTER_CREATOR=
-TWITTER_SITE=
-TWITTER_DOMAIN=
-TWITTER_CARD=
-``` 
 
 ## Usar
 
@@ -84,5 +40,24 @@ Para executar os testes unitários, execute o comando:
 ```
 composer test
 ```
+
+## O que você verá no projeto
+
+- Events e Listeners
+- Mailer
+- FileSystem
+- PDF
+- SEO
+- Validator
+- Pusher Notification
+- Response
+- Template Enginer (PHPRenderer)
+- Pipelines
+- Helpers
+
+## O que pode vir de novidade ou contribuído por você
+
+- Queue e Jobs
+...
 
 Divirta-se!
