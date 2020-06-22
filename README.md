@@ -43,13 +43,14 @@ composer test
 
 ## O que você verá no projeto
 
+- Routes
 - Events e Listeners
 - Mailer
 - FileSystem
 - PDF
 - SEO
 - Validator
-- Pusher Notification
+- Pusher
 - Response
 - Template Enginer (PHPRenderer)
 - Pipelines
