@@ -44,11 +44,11 @@ trait Validation
     {
         if (count($arr) >= 1) {
             if (!array_key_exists($input, $arr)) {
-                self::setMessage($input, 'Este campo não existe');
+                self::setMessage($input, 'This input not exists.');
                 return false;
             }
         } else {
-            self::setMessage('error', $message ?? 'Não há campos a serem validados');
+            self::setMessage('error', $message ?? 'There are not inputs to validate.');
             return false;
         }
 
@@ -63,7 +63,7 @@ trait Validation
     protected static function email(string $input, string $message = null, string $value = null): void
     {
         if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-            self::setMessage($input, $message ?? 'E-mail inválido');
+            self::setMessage($input, $message ?? 'Invalid mail.');
         }
 
     }
@@ -76,7 +76,7 @@ trait Validation
     protected static function required(string $input, string $message = null, string $value = null): void
     {
         if (empty($value)) {
-            self::setMessage($input, $message ?? 'Campo obrigatório');
+            self::setMessage($input, $message ?? 'Required field.');
         }
 
     }
@@ -89,7 +89,7 @@ trait Validation
     protected static function numeric(string $input, string $message = null, $value = null): void
     {
         if (!is_numeric($value)) {
-            self::setMessage($input, $message ?? 'Não é um número válido');
+            self::setMessage($input, $message ?? 'Not a valid number');
         }
 
     }
@@ -103,7 +103,7 @@ trait Validation
     protected static function max(string $input, string $message = null, $value = null, int $max = null): void
     {
         if (strlen($value) > $max) {
-            self::setMessage($input, $message ?? "Este campo deve ter no máximo {$max} caracteres");
+            self::setMessage($input, $message ?? "This field must be at least {$max} characters");
         }
 
     }
@@ -117,7 +117,7 @@ trait Validation
     protected static function min(string $input, string $message = null, $value = null, int $min = null): void
     {
         if (strlen($value) < $min) {
-            self::setMessage($input, $message ?? "Este campo deve ter no mínimo {$min} caracteres");
+            self::setMessage($input, $message ?? "This field must have a maximum of {$min} characters");
         }
     }
 
@@ -131,7 +131,7 @@ trait Validation
     {
         $file = new File($fileInput);
         if ($file->size() > $max) {
-            self::setMessage($input, $message ?? "Este arquivo deve ter no máximo {$max} Kb");
+            self::setMessage($input, $message ?? "This file must have a maximum of {$max} Kb");
         }
     }
 
@@ -145,7 +145,7 @@ trait Validation
     {
         $file = new File($fileInput);
         if (!in_array($file->extension(), $extensions)) {
-            self::setMessage($input, $message ?? 'Para esta ação só é permitido arquivos do tipo ' . implode(", ", $extensions));
+            self::setMessage($input, $message ?? 'For this action, only files of type ' . implode(", ", $extensions)) . '.';
         }
     }
 }
