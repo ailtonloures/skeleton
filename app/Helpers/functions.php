@@ -1,31 +1,5 @@
 <?php
 
-if (!function_exists('first')) {
-    /**
-     * @param array $param
-     * @return string|integer|float|boolean|null
-     */
-    function first(array $param)
-    {
-        if (!empty($param)) {
-            return $param[0];
-        }
-    }
-}
-
-if (!function_exists('last')) {
-    /**
-     * @param array $param
-     * @return string|integer|float|boolean|null
-     */
-    function last(array $param)
-    {
-        if (!empty($param)) {
-            return $param[count($param) - 1];
-        }
-    }
-}
-
 if (!function_exists('url')) {
     /**
      * @param string $path
