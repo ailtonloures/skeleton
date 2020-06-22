@@ -41,20 +41,25 @@ Para executar os testes unitários, execute o comando:
 composer test
 ```
 
-## O que você verá no projeto
+## O que você verá no projeto 
 
-- Routes
-- Events e Listeners
-- Mailer
+***Atenção: Qualquer dúvida que tenha no projeto. Leia a documentação desses componentes.***
+
+- Routes - [Slim](http://www.slimframework.com/docs/v3/)
+- Events e Listeners - [League](https://event.thephpleague.com/2.0/)
+- Mailer - [PHPMailer](https://github.com/PHPMailer/PHPMailer)
 - FileSystem
-- PDF
-- SEO
+- PDF - [DOMPdf](https://github.com/dompdf/dompdf)
+- SEO - [Optmizer](https://github.com/robsonvleite/optimizer)
 - Validator
-- Pusher
+- Notification - [Pusher](https://github.com/pusher/pusher-http-php)
 - Response
-- Template Enginer (PHPRenderer)
-- Pipelines
+- Template Enginer - [PHP-View](https://github.com/slimphp/PHP-View)
+- Pipelines - [League](https://pipeline.thephpleague.com/)
 - Helpers
+- OAuth2 - [League](https://github.com/thephpleague/oauth2-google)
+- Minify - [Documentação](https://github.com/matthiasmullie/minify)
+- Carbon - [Documentação](https://carbon.nesbot.com/docs/)
 
 ## O que pode vir de novidade ou contribuído por você
 
