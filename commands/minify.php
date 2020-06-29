@@ -1,7 +1,8 @@
 <?php
 
-if ($_SERVER["SERVER_NAME"] == "localhost") {
+require __DIR__ . '/../vendor/autoload.php';
 
+try {
     // CSS Minify
     $cssDirName = dirname(__DIR__, 1) . '/templates/assets/css/';
     $cssDir     = dir($cssDirName);
@@ -29,5 +30,10 @@ if ($_SERVER["SERVER_NAME"] == "localhost") {
     }
 
     $minCSS->minify(dirname(__DIR__, 1) . '/public/assets/style.min.css');
-    $minJS->minify(dirname(__DIR__, 1) . '/public/assets/index.min.js');
+    $minJS->minify(dirname(__DIR__, 1) . '/public/assets/index-min.js');
+
+    echo "...\n\nAll files were minified and saved to public/assets\n\n...";
+
+} catch (\Exception $exception) {
+    echo "...\n\n{$exception->getMessage()}\n\n...";
 }
