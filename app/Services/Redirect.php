@@ -2,17 +2,16 @@
 
 namespace App\Services;
 
-use Slim\Container;
 use App\Services\Response;
 
-class Redirect 
-{  
+class Redirect
+{
     /** @var Response $response */
     private $response;
 
-    public function __construct(Container $container)
+    public function __construct(Response $response)
     {
-        $this->response = $container->get('response');
+        $this->response = $response;
     }
 
     /**

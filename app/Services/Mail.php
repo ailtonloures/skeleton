@@ -119,7 +119,7 @@ final class Mail
      */
     public function view(string $path, array $data = []) : Mail
     {
-        $this->mail->Body = response()->content($path, $data);
+        $this->mail->Body = getContent($path, $data);
         return $this;
     }
 
@@ -140,11 +140,12 @@ final class Mail
     {
         try {
             $this->mail->send();
-            return true;
         } catch (Exception $exception) {
             $this->error = $exception;
             return false;
         }
+
+        return true;
     }
 
     /**

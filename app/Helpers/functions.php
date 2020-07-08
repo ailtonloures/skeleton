@@ -59,13 +59,13 @@ if (!function_exists('session_flush')) {
      * @param string|array $keys
      * @return void
      */
-    function session_flush($keys = null) : void
+    function session_flush($keys = null): void
     {
-        if(is_string($keys) && !empty($_SESSION[$keys])) {
+        if (is_string($keys) && !empty($_SESSION[$keys])) {
             unset($_SESSION[$keys]);
-        } else if(is_array($keys)) {
-            foreach($keys as $key) {
-                if(!empty($_SESSION[$key])) {
+        } else if (is_array($keys)) {
+            foreach ($keys as $key) {
+                if (!empty($_SESSION[$key])) {
                     unset($_SESSION[$key]);
                 }
             }
@@ -115,32 +115,56 @@ if (!function_exists('pdf')) {
     }
 }
 
-if(!function_exists('response')) {
+if (!function_exists('response')) {
     /**
      * @return \App\Services\Response
      */
-    function response() : \App\Services\Response
+    function response(): \App\Services\Response
     {
         return slim()->getContainer()->get('response');
     }
 }
 
-if(!function_exists('redirect')) {
+if (!function_exists('redirect')) {
     /**
      * @return \App\Services\Redirect
      */
-    function redirect() : \App\Services\Redirect
+    function redirect(): \App\Services\Redirect
     {
         return slim()->getContainer()->get('redirect');
     }
 }
 
-if(!function_exists('event')) {
+if (!function_exists('event')) {
     /**
      * @return \League\Event\Emitter
      */
-    function event() : \League\Event\Emitter
+    function event(): \League\Event\Emitter
     {
         return slim()->getContainer()->get('emitter');
+    }
+}
+
+if (!function_exists('view')) {
+    /**
+     * @param string $path
+     * @param array $data
+     * @return \App\Services\Response
+     */
+    function view(string $path, array $data = null): \App\Services\Response
+    {
+        return slim()->getContainer()->get('view')->render(response(), "{$path}.phtml", $data);
+    }
+}
+
+if (!function_exists('getContent')) {
+    /**
+     * @param string $path
+     * @param array $data
+     * @return \App\Services\Response
+     */
+    function getContent(string $path, array $data = null): \App\Services\Response
+    {
+        return slim()->getContainer()->get('view')->fetch("{$path}.phtml", $data);
     }
 }

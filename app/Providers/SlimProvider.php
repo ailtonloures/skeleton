@@ -41,14 +41,13 @@ final class SlimProvider extends App
 
                 return $view;
             },
-            'response'     => function (Container $container) {
+            'response'     => function () {
                 $response = new Response;
-                $response->setViewer($container->get('view'));
 
                 return $response;
             },
             'redirect'     => function (Container $container) {
-                $redirect = new Redirect($container);
+                $redirect = new Redirect($container->get('response'));
 
                 return $redirect;
             },

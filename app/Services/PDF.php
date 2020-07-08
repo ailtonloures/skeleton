@@ -35,9 +35,9 @@ final class PDF
      * @param array $data
      * @return PDF
      */
-    public function loadView(string $path, array $data = []) : PDF
+    public function loadView(string $path, array $data = []): PDF
     {
-        $this->pdf->loadHtml(response()->content($path, $data));
+        $this->pdf->loadHtml(getContent($path, $data));
         return $this;
     }
 

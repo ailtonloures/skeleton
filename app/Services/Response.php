@@ -3,34 +3,20 @@
 namespace App\Services;
 
 use Slim\Http\Response as HttpResponse;
-use Slim\Views\PhpRenderer;
 
 class Response extends HttpResponse
 {
-    /** @var PhpRenderer $view */
-    private $view;
-
     /** @var array $data */
     private $data;
-
-    /**
-     * @param PhpRenderer $view
-     * @return Response
-     */
-    public function setViewer(PhpRenderer $view) : Response
-    {
-        $this->view = $view;
-        return $this;
-    }
 
     /**
      * @param string $key
      * @param mixed $value
      * @return Response
      */
-    public function addData(string $key, $value) : Response
+    public function addData(string $key, $value): Response
     {
-        $this->data[$key] = $value;
+        $this->data[trim($key)] = $value;
         return $this;
     }
 
@@ -40,17 +26,17 @@ class Response extends HttpResponse
      */
     public function getData(string $key = null)
     {
-        return !empty($key) ? $this->data[$key] : $this->data;
+        return !empty($key) ? $this->data[trim($key)] : $this->data;
     }
 
     /**
      * @param string $path
      * @param array $data
-     * @return HttpResponse
+     * @return Response
      */
-    public function view(string $path, array $data = []): HttpResponse
-    {   
-        return $this->view->render($this, "{$path}.phtml", array_merge($data, $this->data ?? []));
+    public function view(string $path, array $data = []): Response
+    {
+        return view(trim($path), array_merge($data, $this->data ?? []));
     }
 
     /**
@@ -60,7 +46,7 @@ class Response extends HttpResponse
      */
     public function content(string $path, array $data = [])
     {
-        return $this->view->fetch("{$path}.phtml", array_merge($data, $this->data ?? []));
+        return getContent(trim($path), array_merge($data, $this->data ?? []));
     }
 
     /**
