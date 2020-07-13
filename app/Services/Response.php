@@ -44,7 +44,7 @@ class Response extends HttpResponse
      * @param array $data
      * @return mixed
      */
-    public function content(string $path, array $data = [])
+    public function getContent(string $path, array $data = [])
     {
         return getContent(trim($path), array_merge($data, $this->data ?? []));
     }

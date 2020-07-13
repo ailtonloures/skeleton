@@ -11,6 +11,16 @@ if (!function_exists('url')) {
     }
 }
 
+if (!function_exists('path')) {
+    /**
+     * @return string
+     */
+    function path(): string
+    {
+        return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    }
+}
+
 if (!function_exists('flash')) {
     /**
      * @param string $key
