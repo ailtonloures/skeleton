@@ -1,4 +1,4 @@
-<h1 align="center"> Base-Structure</h1>
+<h1 align="center">Skeleton</h1>
 
 ## Sobre
 
@@ -19,7 +19,7 @@ Requisitos obrigatórios para o funcionamento do projeto
 Com o composer instalado na sua máquina, execute o comando abaixo:
 
 ```
-composer create-project --prefer-dist --stability dev ailtonloures/base-structure [app_name]
+composer create-project --prefer-dist --stability dev ailtonloures/skeleton [app_name]
 ```
 
 ## Usar

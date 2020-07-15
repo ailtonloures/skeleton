@@ -1,7 +1,7 @@
 {
-    "name": "ailtonloures/base-structure",
-    "description": "Estrutura básica para aplicações em PHP 7",
-    "homepage": "https://github.com/ailtonloures/base-structure.git",
+    "name": "ailtonloures/skeleton",
+    "description": "Esqueleto básico para aplicações em PHP 7",
+    "homepage": "https://github.com/ailtonloures/skeleton.git",
     "authors": [
         {
             "name": "Ailton Loures Ferreira",
