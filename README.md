@@ -60,6 +60,7 @@ composer test
 - OAuth2 - [League](https://github.com/thephpleague/oauth2-google)
 - Minify - [Documentação](https://github.com/matthiasmullie/minify)
 - Carbon - [Documentação](https://carbon.nesbot.com/docs/)
+- Migrations e Seed - [Phinx](https://phinx.org/)
 
 ## O que pode vir de novidade ou contribuído por você
 
