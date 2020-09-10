@@ -115,16 +115,6 @@ if (!function_exists('mailer')) {
     }
 }
 
-if (!function_exists('pdf')) {
-    /**
-     * @return \SlimDatalayer\App\Services\PDF
-     */
-    function pdf(string $filename = 'document.pdf', string $paper = 'A4', string $orientation = 'portrait', $options = null): \App\Services\PDF
-    {
-        return new \App\Services\PDF($filename, $paper, $orientation, $options);
-    }
-}
-
 if (!function_exists('response')) {
     /**
      * @return \App\Services\Response
