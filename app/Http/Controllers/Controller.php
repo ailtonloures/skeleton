@@ -7,10 +7,10 @@ use Slim\Http\Request;
 
 class Controller
 {
-    public function index(Request $request, Response $response)
+    public function index()
     {
-        $response->addData('msg', "Hello world");
-
-        return $response->view('home');
+        return response()->view('home', [
+            'msg' => 'Hello World'
+        ]);
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Middlewares;
 
-use Carbon\Carbon;
 use Slim\Http\Request;
 use App\Services\Response;
+use Carbon\Carbon;
 
 final class AuthMiddleware
 {

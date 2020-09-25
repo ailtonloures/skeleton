@@ -95,7 +95,7 @@ final class File
     /**
      * @return integer
      */
-    private function getError(): int
+    public function getError(): int
     {
         return $this->uploadedFile->getError();
     }
