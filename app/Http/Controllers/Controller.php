@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\Response;
-use Slim\Http\Request;
-
 class Controller
 {
     public function index()

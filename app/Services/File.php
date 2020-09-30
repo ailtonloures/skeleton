@@ -4,8 +4,6 @@ namespace App\Services;
 
 use Slim\Http\UploadedFile;
 
-use function PHPUnit\Framework\directoryExists;
-
 final class File
 {
     /** @var UploadedFile $uploadedFile */
