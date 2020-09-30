@@ -49,8 +49,6 @@ composer test
 - Events e Listeners - [League](https://event.thephpleague.com/2.0/)
 - Mailer - [PHPMailer](https://github.com/PHPMailer/PHPMailer)
 - FileSystem
-- PDF - [DOMPdf](https://github.com/dompdf/dompdf)
-- SEO - [Optmizer](https://github.com/robsonvleite/optimizer)
 - Validator - [Documentação](https://github.com/ailtonloures/validator)
 - Notification - [Pusher](https://github.com/pusher/pusher-http-php)
 - Response
@@ -58,7 +56,6 @@ composer test
 - Pipelines - [League](https://pipeline.thephpleague.com/)
 - Helpers
 - OAuth2 - [League](https://github.com/thephpleague/oauth2-google)
-- Minify - [Documentação](https://github.com/matthiasmullie/minify)
 - Carbon - [Documentação](https://carbon.nesbot.com/docs/)
 - Migrations e Seed - [Phinx](https://phinx.org/)
 
