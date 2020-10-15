@@ -9,6 +9,7 @@ class User extends AbstractModel
     use ValidatorTrait;
 
     protected $table = "user";
+    protected $fields = ["id", "username", "email"];
 
     protected function rules()
     {
@@ -25,5 +26,10 @@ class User extends AbstractModel
             'email.*' => 'E-mail inválido',
             'min.*' => 'O valor deve ter no mínimo :min caracteres'
         ];
+    }
+
+    public function scopeUserId($query, $id)
+    {
+        return $query->where(['id' => $id]);
     }
 }

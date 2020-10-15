@@ -26,6 +26,15 @@ abstract class AbstractModel
         $this->data[trim($name)] = $value;
     }
 
+    public function __call($name, $arguments)
+    {   
+        $scopeMethodName = "scope" . ucfirst($name);
+
+        if (method_exists($this, $scopeMethodName)) {
+            return $this->$scopeMethodName($this->statement ?: $this->query(), ...$arguments);
+        }
+    }
+
     /**
      * @return mixed
      */
@@ -112,7 +121,7 @@ abstract class AbstractModel
      */
     public function paginate(callable $callback = null, int $page = 1, int $limit = 20): array
     {   
-        $statement = $this->statement;
+        $statement = $this->statement ?: $this->query()->select("*");
 
         if ($callback != null) {
             $statement = call_user_func($callback, $statement);
