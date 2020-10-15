@@ -3,7 +3,6 @@ namespace App\Services;
 
 use App\Services\DB;
 use Cake\Database\Query;
-use Cake\Database\StatementInterface;
 
 abstract class AbstractModel
 {
@@ -19,19 +18,22 @@ abstract class AbstractModel
     /** @var array $data */
     private $data;
 
+    /** @var Query $statement */
+    private $statement;
+
     public function __set($name, $value)
     {
         $this->data[trim($name)] = $value;
     }
 
     /**
-     * @return StatementInterface
+     * @return mixed
      */
-    public function save(): StatementInterface
+    public function save()
     {
         if (isset($this->data[$this->primaryKey])) {
             $primaryKey = $this->data[$this->primaryKey];
-            
+
             return $this->findByIdAndUpdate($primaryKey, $this->data);
         }
 
@@ -41,9 +43,9 @@ abstract class AbstractModel
     /**
      * @param array $data
      * @param array $types
-     * @return StatementInterface
+     * @return mixed
      */
-    public function create(array $data, array $types = []): StatementInterface
+    public function create(array $data, array $types = [])
     {
         return DB::instance()->insert($this->table, $data, $types);
     }
@@ -52,9 +54,9 @@ abstract class AbstractModel
      * @param array $data
      * @param array $conditions
      * @param array $types
-     * @return StatementInterface
+     * @return mixed
      */
-    public function update(array $data, array $conditions, array $types = []): StatementInterface
+    public function update(array $data, array $conditions, array $types = [])
     {
         return DB::instance()->update($this->table, $data, $conditions, $types);
     }
@@ -62,9 +64,9 @@ abstract class AbstractModel
     /**
      * @param array $conditions
      * @param array $types
-     * @return StatementInterface
+     * @return mixed
      */
-    public function delete(array $conditions, array $types = []): StatementInterface
+    public function delete(array $conditions, array $types = [])
     {
         return DB::instance()->delete($this->table, $conditions, $types);
     }
@@ -72,18 +74,18 @@ abstract class AbstractModel
     /**
      * @param mixed $id
      * @param array $data
-     * @return StatementInterface
+     * @return mixed
      */
-    public function findByIdAndUpdate($id, array $data): StatementInterface
+    public function findByIdAndUpdate($id, array $data)
     {
         return $this->update($data, [$this->primaryKey => $id]);
     }
 
     /**
      * @param mixed $id
-     * @return StatementInterface
+     * @return mixed
      */
-    public function findByIdAndDelete($id): StatementInterface
+    public function findByIdAndDelete($id)
     {
         return $this->delete([$this->primaryKey => $id]);
     }
@@ -92,43 +94,48 @@ abstract class AbstractModel
      * @return Query
      */
     public function query(): Query
-    {   
-        $query = DB::instance()->newQuery()->from($this->table);
+    {
+        $this->statement = DB::instance()->newQuery()->from($this->table);
 
         if (!empty($this->fields)) {
-            return $query->select($this->fields);
+            return $this->statement->select($this->fields);
         }
 
-        return $query;
+        return $this->statement;
     }
 
     /**
+     * @param callable $callback
      * @param integer $page
      * @param integer $limit
      * @return array
      */
-    public function paginate(int $page = 1, int $limit = 20): array
+    public function paginate(callable $callback = null, int $page = 1, int $limit = 20): array
     {   
-        $query = $this->query();
+        $statement = $this->statement;
 
-        $prev = $page - 1;
-        $next = $page + 1;
-        $offset = $prev * $limit;
-        $paginate = $query->limit($limit)->offset($offset)->execute();
+        if ($callback != null) {
+            $statement = call_user_func($callback, $statement);
+        }
 
-        $results = $paginate->fetchAll('assoc');
-        $totalPages = ceil($query->execute()->rowCount() / $limit);
+        $prev     = $page - 1;
+        $next     = $page + 1;
+        $offset   = $prev * $limit;
+        $paginate = $statement->limit($limit)->offset($offset)->execute();
+
+        $results      = $paginate->fetchAll('assoc');
+        $totalPages   = ceil($statement->execute()->rowCount() / $limit);
         $totalResults = $paginate->rowCount();
         $previousPage = $prev == 0 ? null : $prev;
-        $nextPage = $query->execute()->rowCount() > $limit ? $next : null;
+        $nextPage     = $statement->execute()->rowCount() > $limit ? $next : null;
 
         return [
-            'page' => $page,
-            'results' => $results,
-            'total_pages' => $totalPages,
+            'page'          => $page,
+            'results'       => $results,
+            'total_pages'   => $totalPages,
             'total_results' => $totalResults,
             'previous_page' => $previousPage,
-            'next_page' => $nextPage,
+            'next_page'     => $nextPage,
         ];
     }
 }
