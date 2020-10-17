@@ -1,27 +1,28 @@
 <?php
 namespace App\Http\Views;
 
-use Slim\Http\Request;
 use App\Services\APIView;
+use App\Services\Response;
+use Slim\Http\Request;
 
 class ListAndCreateView extends APIView
-{       
-    public function get(Request $request)
+{
+    public function get(Request $request, Response $response)
     {
         # implements here
     }
 
-    public function post(Request $request)
+    public function post(Request $request, Response $response)
     {
         # implements here
     }
 
-    public function put(Request $request)
+    public function put(Request $request, Response $response)
     {
         # implements here
     }
 
-    public function delete(Request $request)
+    public function delete(Request $request, Response $response)
     {
         # implements here
     }
