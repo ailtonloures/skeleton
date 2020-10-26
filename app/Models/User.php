@@ -9,12 +9,12 @@ class User extends AbstractModel
     use ValidatorTrait;
 
     protected $table = "user";
-    protected $fields = ["id", "username", "email"];
+    protected $fields = ["id", "username", "password"];
 
     protected function rules()
     {
         return [
-            'email' => 'required|email',
+            'username' => 'required',
             'password'  => 'required|min:5',
         ];
     }
@@ -23,7 +23,6 @@ class User extends AbstractModel
     {
         return [
             'required.*' => 'O valor é obrigatório.',
-            'email.*' => 'E-mail inválido',
             'min.*' => 'O valor deve ter no mínimo :min caracteres'
         ];
     }
