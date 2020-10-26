@@ -2,9 +2,9 @@
 namespace App\Http\Views;
 
 use App\Models\User;
+use Slim\Http\Request;
 use App\Services\APIView;
 use App\Services\Response;
-use Slim\Http\Request;
 
 class ListAndCreateView extends APIView
 {
@@ -12,7 +12,7 @@ class ListAndCreateView extends APIView
     {
         # implements here
         $user  = new User;
-        $users = $user->query()->execute()->fetchAll('assoc');
+        $users = $user->paginate($request->getQueryParam('page', 1));
 
         return response()->json($users);
     }

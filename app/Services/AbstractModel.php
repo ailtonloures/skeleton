@@ -27,7 +27,7 @@ abstract class AbstractModel
     }
 
     public function __call($name, $arguments)
-    {   
+    {
         $scopeMethodName = "scope" . ucfirst($name);
 
         if (method_exists($this, $scopeMethodName)) {
@@ -114,13 +114,13 @@ abstract class AbstractModel
     }
 
     /**
-     * @param callable $callback
      * @param integer $page
      * @param integer $limit
+     * @param callable $callback
      * @return array
      */
-    public function paginate(callable $callback = null, int $page = 1, int $limit = 20): array
-    {   
+    public function paginate(int $page = 1, int $limit = 20, callable $callback = null): array
+    {
         $statement = $this->statement ?: $this->query()->select("*");
 
         if ($callback != null) {
@@ -130,13 +130,14 @@ abstract class AbstractModel
         $prev     = $page - 1;
         $next     = $page + 1;
         $offset   = $prev * $limit;
+        $rowCount = $statement->execute()->rowCount();
         $paginate = $statement->limit($limit)->offset($offset)->execute();
 
+        $totalPages   = ceil($rowCount / $limit);
         $results      = $paginate->fetchAll('assoc');
-        $totalPages   = ceil($statement->execute()->rowCount() / $limit);
         $totalResults = $paginate->rowCount();
         $previousPage = $prev == 0 ? null : $prev;
-        $nextPage     = $statement->execute()->rowCount() > $limit ? $next : null;
+        $nextPage     = $rowCount > $limit && $next <= $totalPages ? $next : null;
 
         return [
             'page'          => $page,
