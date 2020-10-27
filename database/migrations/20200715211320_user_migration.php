@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-use function PHPSTORM_META\type;
-
 final class UserMigration extends AbstractMigration
 {
     public function up()
