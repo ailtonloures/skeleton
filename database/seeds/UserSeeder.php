@@ -8,8 +8,8 @@ class UserSeeder extends AbstractSeed
     {
         $users = [
             [
-                "username" => "user_test",
-                "password" => "123"
+                "username" => "jhon.doe",
+                "password" => password_hash("123", PASSWORD_DEFAULT)
             ],
         ];
 

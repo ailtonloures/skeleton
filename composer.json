@@ -8,6 +8,12 @@
             "email": "ailton.loures99@gmail.com"
         }
     ],
+    "keywords": [
+        "PHP",
+        "Framework",
+        "Slim",
+        "Skeleton"
+    ],
     "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,

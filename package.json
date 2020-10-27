@@ -1,13 +1,17 @@
 {
-  "name": "base-structure",
+  "name": "skeleton",
   "description": "Estrutura básica para aplicações em PHP 7",
-  "keywords": [],
+  "keywords": [
+    "PHP",
+    "Framework",
+    "Slim"
+  ],
   "author": "",
   "license": "ISC",
-  "homepage": "https://github.com/ailtonloures/base-structure#readme",
+  "homepage": "https://github.com/ailtonloures/skeleton#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ailtonloures/base-structure.git"
+    "url": "git+https://github.com/ailtonloures/skeleton.git"
   },
   "scripts": {
     "commit": "git-cz"
