@@ -76,7 +76,7 @@ final class SlimProvider extends App
     {
         return [
             "origin"         => "*",
-            "methods"        => ["GET", "POST", "PUT", "PATCH", "DELETE"],
+            "methods"        => ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
             "headers.allow"  => ["Authorization", "Content-Type"],
             "headers.expose" => [],
             "credentials"    => true,

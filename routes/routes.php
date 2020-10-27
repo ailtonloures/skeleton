@@ -1,5 +1,6 @@
 <?php
 
+use Slim\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Views\ListAndCreateView;
 
