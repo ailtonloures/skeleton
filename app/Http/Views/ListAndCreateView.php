@@ -24,7 +24,7 @@ class ListAndCreateView extends APIView
 
         $user = $user->create($request->getParsedBody());
 
-        return response()->json("Saved", 201);
+        return response()->json($user, 201);
     }
 
     public function put(Request $request, Response $response)

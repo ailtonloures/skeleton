@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Services\DB;
 use Cake\Database\Query;
+use Cake\Database\Statement\StatementDecorator;
 
 abstract class AbstractModel
 {
@@ -56,9 +57,11 @@ abstract class AbstractModel
      */
     public function create(array $data, array $types = []): array
     {
-        $dataCreated  = DB::instance()->insert($this->table, $data, $types);
-        $lastInsertId = $dataCreated->lastInsertId($this->table, $this->primaryKey);
-        return $this->findById($lastInsertId);
+        $insertedData = DB::instance()->insert($this->table, $data, $types);
+        $driver       = DB::instance()->getDriver();
+        $decorator    = new StatementDecorator($insertedData, $driver);
+        $id           = $decorator->lastInsertId($this->table, $this->primaryKey);
+        return $this->findById($id, array_merge([$this->primaryKey], array_keys($data)));
     }
 
     /**
@@ -84,11 +87,18 @@ abstract class AbstractModel
 
     /**
      * @param mixed $id
+     * @param array $fields
      * @return array
      */
-    public function findById($id)
+    public function findById($id, array $fields = []): array
     {
-        return $this->query()
+        $statement = $this->query(empty($fields));
+
+        if (!empty($fields)) {
+            $statement->select($fields);
+        }
+
+        return $statement
             ->where([$this->primaryKey => $id])
             ->execute()
             ->fetch("assoc");
@@ -97,11 +107,18 @@ abstract class AbstractModel
     /**
      * @param mixed $conditions
      * @param array $types
+     * @param array $fields
      * @return array
      */
-    public function findOne($conditions = null, array $types = [])
+    public function findOne($conditions = null, array $types = [], array $fields = []): array
     {
-        return $this->query()
+        $statement = $this->query(empty($fields));
+
+        if (!empty($fields)) {
+            $statement->select($fields);
+        }
+
+        return $statement
             ->where($conditions, $types)
             ->execute()
             ->fetch("assoc");
@@ -110,12 +127,17 @@ abstract class AbstractModel
     /**
      * @param mixed $conditions
      * @param array $types
+     * @param array $fields
      * @param callable $query
      * @return array
      */
-    public function getAll($conditions = null, array $types = [], callable $query = null): array
+    public function getAll($conditions = null, array $types = [], array $fields = [], callable $query = null): array
     {
-        $statement = $this->query()->where($conditions, $types);
+        $statement = $this->query(empty($fields))->where($conditions, $types);
+
+        if (!empty($fields)) {
+            $statement->select($fields);
+        }
 
         if (!empty($query)) {
             $statement = call_user_func($query, $statement);
@@ -132,7 +154,7 @@ abstract class AbstractModel
     public function findByIdAndUpdate($id, array $data): array
     {
         $this->update($data, [$this->primaryKey => $id]);
-        return $this->findById($id);
+        return $this->findById($id, array_merge([$this->primaryKey], array_keys($data)));
     }
 
     /**
@@ -162,12 +184,17 @@ abstract class AbstractModel
     /**
      * @param integer $page
      * @param integer $limit
+     * @param array $fields
      * @param callable $callback
      * @return array
      */
-    public function paginate(int $page = 1, int $limit = 20, callable $callback = null): array
+    public function paginate(int $page = 1, int $limit = 20, array $fields = [], callable $callback = null): array
     {
-        $statement = $this->statement ?: $this->query();
+        $statement = $this->statement ?: $this->query(empty($fields));
+
+        if (!empty($fields)) {
+            $statement->select($fields);
+        }
 
         if ($callback != null) {
             $statement = call_user_func($callback, $statement);
