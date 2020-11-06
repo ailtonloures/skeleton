@@ -94,6 +94,7 @@ final class SlimProvider extends App
             "ignore"    => [], // Irá ignorar a validação de tudo a partir desta rota
             "secret"    => getenv('JWT_SECRET_KEY'),
             "attribute" => "jwt",
+            "secure"    => false,
             "error"     => function ($response) {
                 return $response->withStatus(401);
             },

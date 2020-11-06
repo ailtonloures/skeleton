@@ -161,9 +161,9 @@ if (!function_exists('getContent')) {
     /**
      * @param string $path
      * @param array $data
-     * @return \App\Services\Response
+     * @return string
      */
-    function getContent(string $path, array $data = null): \App\Services\Response
+    function getContent(string $path, array $data = null): string
     {
         return slim()->getContainer()->get('view')->fetch("{$path}.phtml", $data);
     }

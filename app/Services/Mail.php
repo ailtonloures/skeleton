@@ -27,10 +27,6 @@ final class Mail
         $this->mail->isHTML(true);
         $this->mail->setLanguage(getenv('APP_LOCALE'));
 
-        if (getenv('MAIL_FROM') && getenv('MAIL_NAME')) {
-            $this->mail->setFrom(getenv('MAIL_FROM'), getenv('MAIL_NAME'));
-        }
-
         $this->mail->Host     = getenv('MAIL_HOST');
         $this->mail->Username = getenv('MAIL_USERNAME');
         $this->mail->Password = getenv('MAIL_PASSWORD');

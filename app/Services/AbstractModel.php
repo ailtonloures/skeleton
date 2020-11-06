@@ -36,9 +36,9 @@ abstract class AbstractModel
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function save()
+    public function save(): array
     {
         if (isset($this->data[$this->primaryKey])) {
             $primaryKey = $this->data[$this->primaryKey];
@@ -52,11 +52,13 @@ abstract class AbstractModel
     /**
      * @param array $data
      * @param array $types
-     * @return mixed
+     * @return array
      */
-    public function create(array $data, array $types = [])
+    public function create(array $data, array $types = []): array
     {
-        return DB::instance()->insert($this->table, $data, $types);
+        $dataCreated  = DB::instance()->insert($this->table, $data, $types);
+        $lastInsertId = $dataCreated->lastInsertId($this->table, $this->primaryKey);
+        return $this->findById($lastInsertId);
     }
 
     /**
@@ -82,12 +84,55 @@ abstract class AbstractModel
 
     /**
      * @param mixed $id
-     * @param array $data
-     * @return mixed
+     * @return array
      */
-    public function findByIdAndUpdate($id, array $data)
+    public function findById($id)
     {
-        return $this->update($data, [$this->primaryKey => $id]);
+        return $this->query()
+            ->where([$this->primaryKey => $id])
+            ->execute()
+            ->fetch("assoc");
+    }
+
+    /**
+     * @param mixed $conditions
+     * @param array $types
+     * @return array
+     */
+    public function findOne($conditions = null, array $types = [])
+    {
+        return $this->query()
+            ->where($conditions, $types)
+            ->execute()
+            ->fetch("assoc");
+    }
+
+    /**
+     * @param mixed $conditions
+     * @param array $types
+     * @param callable $query
+     * @return array
+     */
+    public function getAll($conditions = null, array $types = [], callable $query = null): array
+    {
+        $statement = $this->query()->where($conditions, $types);
+
+        if (!empty($query)) {
+            $statement = call_user_func($query, $statement);
+        }
+
+        return $statement->execute()->fetchAll("assoc");
+    }
+
+    /**
+     * @param mixed $id
+     * @param array $data
+     * @return array
+     */
+    public function findByIdAndUpdate($id, array $data): array
+    {
+        $this->update($data, [$this->primaryKey => $id]);
+        return $this->findById($id);
     }
 
     /**
@@ -100,13 +145,14 @@ abstract class AbstractModel
     }
 
     /**
+     * @param bool $useFields
      * @return Query
      */
-    public function query(): Query
+    public function query(bool $useFields = true): Query
     {
         $this->statement = DB::instance()->newQuery()->from($this->table);
 
-        if (!empty($this->fields)) {
+        if (!empty($this->fields) && $useFields === true) {
             return $this->statement->select($this->fields);
         }
 
@@ -121,7 +167,7 @@ abstract class AbstractModel
      */
     public function paginate(int $page = 1, int $limit = 20, callable $callback = null): array
     {
-        $statement = $this->statement ?: $this->query()->select("*");
+        $statement = $this->statement ?: $this->query();
 
         if ($callback != null) {
             $statement = call_user_func($callback, $statement);

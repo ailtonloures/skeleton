@@ -42,9 +42,9 @@ class Response extends HttpResponse
     /**
      * @param string $path
      * @param array $data
-     * @return mixed
+     * @return string
      */
-    public function getContent(string $path, array $data = [])
+    public function getContent(string $path, array $data = []): string
     {
         return getContent(trim($path), array_merge($data, $this->data ?? []));
     }
