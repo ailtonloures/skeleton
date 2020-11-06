@@ -55,13 +55,13 @@ abstract class AbstractModel
      * @param array $types
      * @return array
      */
-    public function create(array $data, array $types = []): array
+    public function create(array $data, array $types = [])
     {
         $insertedData = DB::instance()->insert($this->table, $data, $types);
         $driver       = DB::instance()->getDriver();
         $decorator    = new StatementDecorator($insertedData, $driver);
         $id           = $decorator->lastInsertId($this->table, $this->primaryKey);
-        return $this->findById($id, array_merge([$this->primaryKey], array_keys($data)));
+        return $this->findById($id, "*");
     }
 
     /**
@@ -87,10 +87,10 @@ abstract class AbstractModel
 
     /**
      * @param mixed $id
-     * @param array $fields
+     * @param string|array $fields
      * @return array
      */
-    public function findById($id, array $fields = []): array
+    public function findById($id, $fields = null): array
     {
         $statement = $this->query(empty($fields));
 
@@ -107,10 +107,10 @@ abstract class AbstractModel
     /**
      * @param mixed $conditions
      * @param array $types
-     * @param array $fields
+     * @param string|array $fields
      * @return array
      */
-    public function findOne($conditions = null, array $types = [], array $fields = []): array
+    public function findOne($conditions = null, array $types = [], $fields = null): array
     {
         $statement = $this->query(empty($fields));
 
@@ -127,11 +127,11 @@ abstract class AbstractModel
     /**
      * @param mixed $conditions
      * @param array $types
-     * @param array $fields
+     * @param string|array $fields
      * @param callable $query
      * @return array
      */
-    public function getAll($conditions = null, array $types = [], array $fields = [], callable $query = null): array
+    public function getAll($conditions = null, array $types = [], $fields = null, callable $query = null): array
     {
         $statement = $this->query(empty($fields))->where($conditions, $types);
 
@@ -154,7 +154,7 @@ abstract class AbstractModel
     public function findByIdAndUpdate($id, array $data): array
     {
         $this->update($data, [$this->primaryKey => $id]);
-        return $this->findById($id, array_merge([$this->primaryKey], array_keys($data)));
+        return $this->findById($id, "*");
     }
 
     /**
@@ -184,11 +184,11 @@ abstract class AbstractModel
     /**
      * @param integer $page
      * @param integer $limit
-     * @param array $fields
+     * @param string|array $fields
      * @param callable $callback
      * @return array
      */
-    public function paginate(int $page = 1, int $limit = 20, array $fields = [], callable $callback = null): array
+    public function paginate(int $page = 1, int $limit = 20, $fields = null, callable $callback = null): array
     {
         $statement = $this->statement ?: $this->query(empty($fields));
 

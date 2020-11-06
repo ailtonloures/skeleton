@@ -1,16 +1,5 @@
 <?php
 
-if (!function_exists('url')) {
-    /**
-     * @param string $path
-     * @return null|string
-     */
-    function url(string $path = null): ?string
-    {
-        return getenv("APP_HOST") != null ? getenv("APP_HOST") . "{$path}" : null;
-    }
-}
-
 if (!function_exists('path')) {
     /**
      * @return string
