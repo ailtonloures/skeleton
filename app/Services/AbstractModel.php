@@ -37,9 +37,9 @@ abstract class AbstractModel
     }
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function save(): array
+    public function save()
     {
         if (isset($this->data[$this->primaryKey])) {
             $primaryKey = $this->data[$this->primaryKey];
@@ -53,7 +53,7 @@ abstract class AbstractModel
     /**
      * @param array $data
      * @param array $types
-     * @return array
+     * @return mixed
      */
     public function create(array $data, array $types = [])
     {
@@ -88,9 +88,9 @@ abstract class AbstractModel
     /**
      * @param mixed $id
      * @param string|array $fields
-     * @return array
+     * @return mixed
      */
-    public function findById($id, $fields = null): array
+    public function findById($id, $fields = null)
     {
         $statement = $this->query(empty($fields));
 
@@ -108,9 +108,9 @@ abstract class AbstractModel
      * @param mixed $conditions
      * @param array $types
      * @param string|array $fields
-     * @return array
+     * @return mixed
      */
-    public function findOne($conditions = null, array $types = [], $fields = null): array
+    public function findOne($conditions = null, array $types = [], $fields = null)
     {
         $statement = $this->query(empty($fields));
 
@@ -149,9 +149,9 @@ abstract class AbstractModel
     /**
      * @param mixed $id
      * @param array $data
-     * @return array
+     * @return mixed
      */
-    public function findByIdAndUpdate($id, array $data): array
+    public function findByIdAndUpdate($id, array $data)
     {
         $this->update($data, [$this->primaryKey => $id]);
         return $this->findById($id, "*");
