@@ -17,4 +17,24 @@ abstract class APIView implements APIViewInterface
         $method = strtolower($request->getMethod());
         return $this->$method($request, $response);
     }
+
+    public function get(Request $request, Response $response)
+    { 
+        # implements here 
+    }
+
+    public function post(Request $request, Response $response)
+    { 
+        # implements here 
+    }
+
+    public function put(Request $request, Response $response)
+    { 
+        # implements here 
+    }
+
+    public function delete(Request $request, Response $response)
+    { 
+        # implements here 
+    }
 }

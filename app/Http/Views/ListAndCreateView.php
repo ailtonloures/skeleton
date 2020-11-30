@@ -10,30 +10,17 @@ class ListAndCreateView extends APIView
 {
     public function get(Request $request, Response $response)
     {
-        # implements here
         $user  = new User;
         $users = $user->paginate($request->getQueryParam('page', 1));
 
-        return response()->json($users);
+        return $response->json($users);
     }
 
     public function post(Request $request, Response $response)
     {
-        # implements here
         $user = new User;
-
         $user = $user->create($request->getParsedBody());
 
-        return response()->json($user, 201);
-    }
-
-    public function put(Request $request, Response $response)
-    {
-        # implements here
-    }
-
-    public function delete(Request $request, Response $response)
-    {
-        # implements here
+        return $response->json($user, 201);
     }
 }
