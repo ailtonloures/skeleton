@@ -14,6 +14,7 @@ class EventProvider implements ListenerProviderInterface
      */
     public function provideListeners(ListenerAcceptorInterface $acceptor)
     {
+        # add listeners here...
         $acceptor->addListener('event', new ExampleListener);
     }
 }

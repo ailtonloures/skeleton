@@ -13,5 +13,7 @@ class ExampleListener extends AbstractListener
      * @return void
      */
     public function handle(EventInterface $event, $param = null)
-    {}
+    {
+        # code here...
+    }
 }
