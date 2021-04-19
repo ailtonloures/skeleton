@@ -1,9 +1,8 @@
 <?php
 
-if ($_SERVER['SERVER_NAME'] == "localhost") {
+if (!isset($_SERVER['SERVER_NAME']) || $_SERVER['SERVER_NAME'] === "localhost")
     Dotenv\Dotenv::createImmutable(__DIR__ . '/../')->load();
-}
-
+    
 return
 [
     'paths' => [
