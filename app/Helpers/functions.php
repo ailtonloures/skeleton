@@ -84,16 +84,6 @@ if (!function_exists('slim')) {
     }
 }
 
-if (!function_exists('notification')) {
-    /**
-     * @return \App\Services\Notification
-     */
-    function notification(): \App\Services\Notification
-    {
-        return new \App\Services\Notification;
-    }
-}
-
 if (!function_exists('mailer')) {
     /**
      * @return \App\Services\Mail
