@@ -2,9 +2,9 @@
 namespace WebSocket\Components;
 
 use Exception;
+use Ratchet\ConnectionInterface;
 use Ratchet\RFC6455\Messaging\MessageInterface;
 use Ratchet\WebSocket\MessageComponentInterface;
-use React\Socket\ConnectionInterface;
 use SplObjectStorage;
 
 class WebSocketComponent implements MessageComponentInterface
