@@ -29,8 +29,8 @@ final class SlimProvider extends App
     {
         return [
             'settings'     => [
-                'displayErrorDetails'    => ($_SERVER["SERVER_NAME"] == "localhost") ? getenv('DISPLAY_ERROR_DETAILS') : false,
-                'addContentLengthHeader' => getenv('ADD_CONTENT_LENGTH_HEADER'),
+                'displayErrorDetails'    => getenv('APP_ENV') != "prod" ? true : false,
+                'addContentLengthHeader' => getenv('APP_ENV') != "prod" ? true : false,
             ],
             'foundHandler' => function () {
                 return new RequestResponseArgs();
