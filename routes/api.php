@@ -1,7 +1,7 @@
 <?php
 
-/** @var \App\Providers\SlimProvider $router */
+/** @var \App\Providers\AppProvider $app */
 
-$router->get('', function() {
+$app->get('', function() {
    return response()->json('Hello world');
 });

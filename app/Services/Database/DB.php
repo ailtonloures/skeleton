@@ -1,5 +1,5 @@
 <?php
-namespace App\Services;
+namespace App\Services\Database;
 
 use Cake\Database\Connection;
 use Cake\Database\Driver\Mysql;

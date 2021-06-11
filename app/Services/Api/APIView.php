@@ -1,8 +1,8 @@
 <?php
-namespace App\Services;
+namespace App\Services\Api;
 
-use App\Services\APIViewInterface;
-use App\Services\Response;
+use App\Services\Api\APIViewInterface;
+use App\Services\Utils\Response;
 use Slim\Http\Request;
 
 abstract class APIView implements APIViewInterface
@@ -18,23 +18,23 @@ abstract class APIView implements APIViewInterface
         return $this->$method($request, $response);
     }
 
-    public function get(Request $request, Response $response)
-    { 
-        # implements here 
+    public function get(Request $request, $response)
+    {
+        # implements here
     }
 
     public function post(Request $request, Response $response)
-    { 
-        # implements here 
+    {
+        # implements here
     }
 
     public function put(Request $request, Response $response)
-    { 
-        # implements here 
+    {
+        # implements here
     }
 
     public function delete(Request $request, Response $response)
-    { 
-        # implements here 
+    {
+        # implements here
     }
 }

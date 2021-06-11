@@ -76,29 +76,29 @@ if (!function_exists('session_flush')) {
 
 if (!function_exists('slim')) {
     /**
-     * @return \App\Providers\SlimProvider
+     * @return \App\Providers\AppProvider
      */
-    function slim(): \App\Providers\SlimProvider
+    function slim(): \App\Providers\AppProvider
     {
-        return new \App\Providers\SlimProvider;
+        return new \App\Providers\AppProvider;
     }
 }
 
 if (!function_exists('mailer')) {
     /**
-     * @return \App\Services\Mail
+     * @return \App\Services\Utils\Mail
      */
-    function mailer(): \App\Services\Mail
+    function mailer(): \App\Services\Utils\Mail
     {
-        return new \App\Services\Mail;
+        return new \App\Services\Utils\Mail;
     }
 }
 
 if (!function_exists('response')) {
     /**
-     * @return \App\Services\Response
+     * @return \App\Services\Utils\Response
      */
-    function response(): \App\Services\Response
+    function response(): \App\Services\Utils\Response
     {
         return slim()->getContainer()->get('response');
     }
@@ -108,7 +108,7 @@ if (!function_exists('redirect')) {
     /**
      * @return \App\Services\Redirect
      */
-    function redirect(): \App\Services\Redirect
+    function redirect(): \App\Services\Utils\Redirect
     {
         return slim()->getContainer()->get('redirect');
     }
@@ -128,9 +128,9 @@ if (!function_exists('view')) {
     /**
      * @param string $path
      * @param array $data
-     * @return \App\Services\Response
+     * @return \App\Services\Utils\Response
      */
-    function view(string $path, array $data = null): \App\Services\Response
+    function view(string $path, array $data = null): \App\Services\Utils\Response
     {
         return slim()->getContainer()->get('view')->render(response(), "{$path}.phtml", $data);
     }

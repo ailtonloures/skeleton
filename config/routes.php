@@ -1,13 +1,13 @@
 <?php
 
-$router = new App\Providers\SlimProvider();
+$app = new App\Providers\AppProvider();
 
-$router->group('', function () use ($router) {
-    require_once __DIR__ . '/../routes/routes.php';
+$app->group('', function () use ($app) {
+    require_once __DIR__ . '/../routes/web.php';
 });
 
-$router->group('/api', function () use ($router) {
+$app->group('/api', function () use ($app) {
     require_once __DIR__ . '/../routes/api.php';
 });
 
-$router->run();
+$app->run();

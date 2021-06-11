@@ -1,7 +1,7 @@
 <?php
-namespace App\Services;
+namespace App\Services\Database;
 
-use App\Services\DB;
+use App\Services\Database\DB;
 use Cake\Database\Query;
 use Cake\Database\Statement\StatementDecorator;
 

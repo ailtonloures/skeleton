@@ -1,21 +1,21 @@
 <?php
 namespace App\Models;
 
-use App\Services\AbstractModel;
+use App\Services\Database\AbstractModel;
 use App\Services\ValidatorTrait;
 
 class User extends AbstractModel
 {
     use ValidatorTrait;
 
-    protected $table = "user";
+    protected $table  = "user";
     protected $fields = ["id", "username", "password"];
 
     protected function rules()
     {
         return [
             'username' => 'required',
-            'password'  => 'required|min:5',
+            'password' => 'required|min:5',
         ];
     }
 
@@ -23,7 +23,7 @@ class User extends AbstractModel
     {
         return [
             'required.*' => 'O valor é obrigatório.',
-            'min.*' => 'O valor deve ter no mínimo :min caracteres'
+            'min.*'      => 'O valor deve ter no mínimo :min caracteres',
         ];
     }
 

@@ -2,9 +2,9 @@
 
 namespace App\Http\Middlewares;
 
-use Slim\Http\Request;
-use App\Services\Response;
+use App\Services\Utils\Response;
 use Carbon\Carbon;
+use Slim\Http\Request;
 
 final class AuthMiddleware
 {
@@ -26,7 +26,7 @@ final class AuthMiddleware
             if ($tokenExpired < $now) {
                 return $response->error("Session expired", 401);
             }
-        } else {            
+        } else {
             return $response->error("Invalid token", 401);
         }
 

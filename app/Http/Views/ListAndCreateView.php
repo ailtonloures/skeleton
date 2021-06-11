@@ -2,9 +2,9 @@
 namespace App\Http\Views;
 
 use App\Models\User;
+use App\Services\Api\APIView;
+use App\Services\Utils\Response;
 use Slim\Http\Request;
-use App\Services\APIView;
-use App\Services\Response;
 
 class ListAndCreateView extends APIView
 {

@@ -1,7 +1,7 @@
 <?php
-namespace App\Services;
+namespace App\Services\Api;
 
-use App\Services\Response;
+use App\Services\Utils\Response;
 use Slim\Http\Request;
 
 interface APIViewInterface

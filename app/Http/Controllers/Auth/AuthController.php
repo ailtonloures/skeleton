@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Slim\Http\Request;
-use App\Services\Response;
+use App\Services\Utils\Response;
 use League\OAuth2\Client\Provider\Google;
+use Slim\Http\Request;
 
 class AuthController
-{   
+{
     /**
-     * Authentication Google OAuth2 
+     * Authentication Google OAuth2
      *
      * @param Request $request
      * @param Response $response
      * @return Response
      */
-    public function googleLogin(Request $request, Response $response) : Response
-    {   
+    public function googleLogin(Request $request, Response $response): Response
+    {
         $provider = new Google([
             'clientId'     => '',
             'clientSecret' => '',
