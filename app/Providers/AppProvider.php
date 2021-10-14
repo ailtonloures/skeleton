@@ -22,10 +22,6 @@ final class AppProvider extends App
     {
         parent::__construct(
             [
-                'settings'     => [
-                    'displayErrorDetails'    => getenv('APP_ENV') != 'prod' ? true : false,
-                    'addContentLengthHeader' => getenv('APP_ENV') != 'prod' ? true : false,
-                ],
                 'foundHandler' => function () {
                     return new RequestResponseArgs();
                 },
