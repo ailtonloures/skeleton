@@ -1,40 +1,46 @@
 <?php
 namespace App\Services\Api;
 
-use App\Services\Api\APIViewInterface;
-use App\Services\Utils\Response;
 use Slim\Http\Request;
+use App\Services\Api\Response;
+use App\Services\Api\APIViewInterface;
 
 abstract class APIView implements APIViewInterface
-{
-    /**
-     * @param Request $request
-     * @param Response $response
-     * @return void
-     */
-    public function asView(Request $request, Response $response)
-    {
+{   
+    public function asView(
+        Request $request,
+        Response $response
+    ): mixed {
         $method = strtolower($request->getMethod());
+
         return $this->$method($request, $response);
     }
 
-    public function get(Request $request, $response)
-    {
-        # implements here
+    public function delete(
+        Request $request,
+        Response $response
+    ): Response {
+        return $response;
     }
 
-    public function post(Request $request, Response $response)
-    {
-        # implements here
+    public function get(
+        Request $request,
+        Response $response
+    ): Response {
+        return $response;
     }
 
-    public function put(Request $request, Response $response)
-    {
-        # implements here
+    public function post(
+        Request $request,
+        Response $response
+    ): Response {
+        return $response;
     }
 
-    public function delete(Request $request, Response $response)
-    {
-        # implements here
+    public function put(
+        Request $request,
+        Response $response
+    ): Response {
+        return $response;
     }
 }

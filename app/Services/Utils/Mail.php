@@ -8,11 +8,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 final class Mail
 {
-    /** @var PHPMailer $mail */
-    private $mail;
-
     /** @var Exception $error */
     private $error;
+
+    /** @var PHPMailer $mail */
+    private $mail;
 
     public function __construct()
     {
@@ -21,7 +21,7 @@ final class Mail
         $this->mail->SMTPDebug  = SMTP::DEBUG_OFF;
         $this->mail->SMTPAuth   = true;
         $this->mail->SMTPSecure = getenv('MAIL_CRYPT');
-        $this->mail->Charset    = "UTF-8";
+        $this->mail->Charset    = 'UTF-8';
 
         $this->mail->isSMTP();
         $this->mail->isHTML(true);
@@ -34,46 +34,13 @@ final class Mail
     }
 
     /**
-     * @param string $email
-     * @param string|null $name
+     * @param string $alt
      * @return Mail
      */
-    public function from(string $email, ?string $name = null): Mail
+    public function altBody(string $alt): Mail
     {
-        $this->mail->setFrom($email, $name);
-        return $this;
-    }
+        $this->mail->AltBody = $alt;
 
-    /**
-     * @param string $email
-     * @param string|null $name
-     * @return Mail
-     */
-    public function to(string $email, ?string $name = null): Mail
-    {
-        $this->mail->addAddress($email, $name);
-        return $this;
-    }
-
-    /**
-     * @param string $email
-     * @param string|null $name
-     * @return Mail
-     */
-    public function cc(string $email, ?string $name = null): Mail
-    {
-        $this->mail->addCC($email, $name);
-        return $this;
-    }
-
-    /**
-     * @param string $email
-     * @param string|null $name
-     * @return Mail
-     */
-    public function bcc(string $email, ?string $name = null): Mail
-    {
-        $this->mail->addBCC($email, $name);
         return $this;
     }
 
@@ -84,16 +51,21 @@ final class Mail
     public function attach(string $path): Mail
     {
         $this->mail->addAttachment($path);
+
         return $this;
     }
 
     /**
-     * @param string $subject
+     * @param string $email
+     * @param string|null $name
      * @return Mail
      */
-    public function subject(string $subject): Mail
-    {
-        $this->mail->Subject = $subject;
+    public function bcc(
+        string $email,
+        ?string $name = null
+    ): Mail {
+        $this->mail->addBCC($email, $name);
+
         return $this;
     }
 
@@ -105,28 +77,44 @@ final class Mail
     public function body(string $body): Mail
     {
         $this->mail->Body = $body;
+
         return $this;
     }
 
     /**
-     * @param string $path
-     * @param array $data
+     * @param string $email
+     * @param string|null $name
      * @return Mail
      */
-    public function view(string $path, array $data = []) : Mail
-    {
-        $this->mail->Body = getContent($path, $data);
+    public function cc(
+        string $email,
+        ?string $name = null
+    ): Mail {
+        $this->mail->addCC($email, $name);
+
         return $this;
     }
 
     /**
-     * @param string $alt
+     * @param string $email
+     * @param string|null $name
      * @return Mail
      */
-    public function altBody(string $alt): Mail
-    {
-        $this->mail->AltBody = $alt;
+    public function from(
+        string $email,
+        ?string $name = null
+    ): Mail {
+        $this->mail->setFrom($email, $name);
+
         return $this;
+    }
+
+    /**
+     * @return Exception
+     */
+    public function getError(): Exception
+    {
+        return $this->error;
     }
 
     /**
@@ -138,6 +126,7 @@ final class Mail
             $this->mail->send();
         } catch (Exception $exception) {
             $this->error = $exception;
+
             return false;
         }
 
@@ -145,10 +134,41 @@ final class Mail
     }
 
     /**
-     * @return Exception
+     * @param string $subject
+     * @return Mail
      */
-    public function getError() : Exception
+    public function subject(string $subject): Mail
     {
-        return $this->error;
+        $this->mail->Subject = $subject;
+
+        return $this;
+    }
+
+    /**
+     * @param string $email
+     * @param string|null $name
+     * @return Mail
+     */
+    public function to(
+        string $email,
+        ?string $name = null
+    ): Mail {
+        $this->mail->addAddress($email, $name);
+
+        return $this;
+    }
+
+    /**
+     * @param string $path
+     * @param array $data
+     * @return Mail
+     */
+    public function view(
+        string $path,
+        array $data = []
+    ): Mail {
+        $this->mail->Body = getContent($path, $data);
+
+        return $this;
     }
 }

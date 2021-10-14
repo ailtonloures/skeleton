@@ -2,6 +2,6 @@
 
 /** @var \App\Providers\AppProvider $app */
 
-$app->get('', function() {
+$app->get('', function () {
    return response()->json('Hello world');
 });

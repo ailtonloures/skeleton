@@ -1,9 +1,4 @@
 .env
 
-/vendor/
-/node_modules/
-
-composer.lock
-package-lock.json
-
-*.sqlite3
+/vendor
+/node_modules

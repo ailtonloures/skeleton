@@ -6,20 +6,23 @@
     "Framework",
     "Slim"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "email": "ailton.loures99@gmail.com",
+    "name": "Ailton Loures"
+  },
+  "license": "MIT",
   "homepage": "https://github.com/ailtonloures/skeleton#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ailtonloures/skeleton.git"
+    "url": "https://github.com/ailtonloures/skeleton.git"
   },
   "scripts": {
     "commit": "git-cz"
   },
   "devDependencies": {
-    "commitizen": "^4.1.2",
-    "cz-conventional-changelog": "^3.2.0",
-    "husky": "^4.2.5"
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^7.0.1"
   },
   "husky": {
     "hooks": {

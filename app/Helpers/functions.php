@@ -16,19 +16,23 @@ if (!function_exists('flash')) {
      * @param mixed $value
      * @return null|mixed
      */
-    function flash(string $key, $value = null)
-    {
+    function flash(
+        string $key,
+        mixed $value = null
+    ) {
         if (!empty($value)) {
             $_SESSION[$key] = $value;
+
             return;
         }
 
         if (isset($_SESSION[$key]) && $flash = $_SESSION[$key]) {
             unset($_SESSION[$key]);
+
             return $flash;
         }
 
-        return null;
+        return;
     }
 }
 
@@ -38,10 +42,13 @@ if (!function_exists('session')) {
      * @param mixed $value
      * @return null|mixed
      */
-    function session(string $key, $value = null)
-    {
+    function session(
+        string $key,
+        mixed $value = null
+    ) {
         if (!empty($value)) {
             $_SESSION[$key] = $value;
+
             return;
         }
 
@@ -49,7 +56,7 @@ if (!function_exists('session')) {
             return $session;
         }
 
-        return null;
+        return;
     }
 }
 
@@ -80,7 +87,7 @@ if (!function_exists('slim')) {
      */
     function slim(): \App\Providers\AppProvider
     {
-        return new \App\Providers\AppProvider;
+        return new \App\Providers\AppProvider();
     }
 }
 
@@ -90,15 +97,15 @@ if (!function_exists('mailer')) {
      */
     function mailer(): \App\Services\Utils\Mail
     {
-        return new \App\Services\Utils\Mail;
+        return new \App\Services\Utils\Mail();
     }
 }
 
 if (!function_exists('response')) {
     /**
-     * @return \App\Services\Utils\Response
+     * @return \App\Services\Api\Response
      */
-    function response(): \App\Services\Utils\Response
+    function response(): \App\Services\Api\Response
     {
         return slim()->getContainer()->get('response');
     }
@@ -128,10 +135,12 @@ if (!function_exists('view')) {
     /**
      * @param string $path
      * @param array $data
-     * @return \App\Services\Utils\Response
+     * @return \App\Services\Api\Response
      */
-    function view(string $path, array $data = null): \App\Services\Utils\Response
-    {
+    function view(
+        string $path,
+        array $data = null
+    ): \App\Services\Api\Response {
         return slim()->getContainer()->get('view')->render(response(), "{$path}.phtml", $data);
     }
 }
@@ -142,8 +151,10 @@ if (!function_exists('getContent')) {
      * @param array $data
      * @return string
      */
-    function getContent(string $path, array $data = null): string
-    {
+    function getContent(
+        string $path,
+        array $data = null
+    ): string {
         return slim()->getContainer()->get('view')->fetch("{$path}.phtml", $data);
     }
 }

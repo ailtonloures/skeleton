@@ -5,7 +5,7 @@ namespace App\Services\Utils;
 use Pusher\Pusher;
 
 final class Notify
-{   
+{
     /**
      * @return Pusher
      */
@@ -16,7 +16,12 @@ final class Notify
             'useTLS'  => true,
         ];
 
-        $pusher = new Pusher(getenv('AUTH_KEY'), getenv('SECRET'), getenv('APP_ID'), $options);
+        $pusher = new Pusher(
+            getenv('AUTH_KEY'),
+            getenv('SECRET'),
+            getenv('APP_ID'),
+            $options
+        );
 
         return $pusher;
     }

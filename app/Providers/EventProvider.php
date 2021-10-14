@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Listeners\ExampleListener;
 use League\Event\ListenerAcceptorInterface;
 use League\Event\ListenerProviderInterface;
 
@@ -15,6 +14,5 @@ class EventProvider implements ListenerProviderInterface
     public function provideListeners(ListenerAcceptorInterface $acceptor)
     {
         # add listeners here...
-        $acceptor->addListener('event', new ExampleListener);
     }
 }

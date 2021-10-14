@@ -1,36 +1,56 @@
 <?php
 namespace App\Services\Api;
 
-use App\Services\Utils\Response;
 use Slim\Http\Request;
+use App\Services\Api\Response;
 
 interface APIViewInterface
-{
+{   
     /**
+     * Delete Http function
+     *
      * @param Request $request
      * @param Response $response
-     * @return mixed
+     * @return Response
      */
-    public function get(Request $request, Response $response);
+    public function delete(
+        Request $request,
+        Response $response
+    ): Response;
 
     /**
+     * Get Http function
+     *
      * @param Request $request
      * @param Response $response
-     * @return mixed
+     * @return Response
      */
-    public function post(Request $request, Response $response);
+    public function get(
+        Request $request,
+        Response $response
+    ): Response;
 
     /**
+     * Post Http function
+     *
      * @param Request $request
      * @param Response $response
-     * @return mixed
+     * @return Response
      */
-    public function put(Request $request, Response $response);
+    public function post(
+        Request $request,
+        Response $response
+    ): Response;
 
     /**
+     * Put Http function
+     *
      * @param Request $request
      * @param Response $response
-     * @return mixed
+     * @return Response
      */
-    public function delete(Request $request, Response $response);
+    public function put(
+        Request $request,
+        Response $response
+    ): Response;
 }

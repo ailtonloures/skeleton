@@ -2,26 +2,29 @@
 
 namespace App\Providers;
 
-use App\Providers\EventProvider;
-use App\Services\Utils\Redirect;
-use App\Services\Utils\Response;
-use League\Event\Emitter;
 use Slim\App;
 use Slim\Container;
-use Slim\Handlers\Strategies\RequestResponseArgs;
+use League\Event\Emitter;
 use Slim\Views\PhpRenderer;
+use App\Services\Api\Response;
+use App\Providers\EventProvider;
+use App\Services\Utils\Redirect;
 use Tuupola\Middleware\CorsMiddleware;
 use Tuupola\Middleware\JwtAuthentication;
+use Slim\Handlers\Strategies\RequestResponseArgs;
 
 final class AppProvider extends App
 {
+    /**
+     * @return mixed
+     */
     public function __construct()
     {
         parent::__construct(
             [
                 'settings'     => [
-                    'displayErrorDetails'    => getenv('APP_ENV') != "prod" ? true : false,
-                    'addContentLengthHeader' => getenv('APP_ENV') != "prod" ? true : false,
+                    'displayErrorDetails'    => getenv('APP_ENV') != 'prod' ? true : false,
+                    'addContentLengthHeader' => getenv('APP_ENV') != 'prod' ? true : false,
                 ],
                 'foundHandler' => function () {
                     return new RequestResponseArgs();
@@ -33,7 +36,7 @@ final class AppProvider extends App
                     return $view;
                 },
                 'response'     => function () {
-                    $response = new Response;
+                    $response = new Response();
 
                     return $response;
                 },
@@ -43,8 +46,8 @@ final class AppProvider extends App
                     return $redirect;
                 },
                 'emitter'      => function () {
-                    $emitter = new Emitter;
-                    $emitter->useListenerProvider(new EventProvider);
+                    $emitter = new Emitter();
+                    $emitter->useListenerProvider(new EventProvider());
 
                     return $emitter;
                 },
@@ -63,12 +66,12 @@ final class AppProvider extends App
         $this->add(
             new JwtAuthentication(
                 [
-                    "path"      => [], // Irá validar tudo a parrtir desta rota
-                    "ignore"    => [], // Irá ignorar a validação de tudo a partir desta rota
-                    "secret"    => getenv('JWT_SECRET_KEY'),
-                    "attribute" => "jwt",
-                    "secure"    => false,
-                    "error"     => function ($response) {
+                    'path'      => [], // Irá validar tudo a parrtir desta rota
+                    'ignore'    => [], // Irá ignorar a validação de tudo a partir desta rota
+                    'secret'    => getenv('JWT_SECRET_KEY'),
+                    'attribute' => 'jwt',
+                    'secure'    => false,
+                    'error'     => function ($response) {
                         return $response->withStatus(401);
                     },
                 ]
@@ -79,12 +82,12 @@ final class AppProvider extends App
         $this->add(
             new CorsMiddleware(
                 [
-                    "origin"         => "*",
-                    "methods"        => ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-                    "headers.allow"  => ["Authorization", "Content-Type"],
-                    "headers.expose" => [],
-                    "credentials"    => true,
-                    "cache"          => 0,
+                    'origin'         => '*',
+                    'methods'        => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+                    'headers.allow'  => ['Authorization', 'Content-Type'],
+                    'headers.expose' => [],
+                    'credentials'    => true,
+                    'cache'          => 0,
                 ]
             )
         );

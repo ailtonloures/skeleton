@@ -9,6 +9,23 @@ trait ValidatorTrait
     protected $validator;
 
     /**
+     * @param boolean $json
+     * @return array
+     */
+    public function getValidationErrors(bool $json = false): array
+    {
+        return $this->validator->fails($json);
+    }
+
+    /**
+     * @return boolean
+     */
+    public function invalid(): bool
+    {
+        return $this->validator->invalid();
+    }
+
+    /**
      * @param array $target
      * @return self
      */
@@ -21,22 +38,5 @@ trait ValidatorTrait
         $this->validator = Validator::make($target, $rules, $messages, $attributes);
 
         return $this;
-    }
-
-    /**
-     * @return boolean
-     */
-    public function invalid(): bool
-    {
-        return $this->validator->invalid();
-    }
-
-    /**
-     * @param boolean $json
-     * @return array
-     */
-    public function getValidationErrors(bool $json = false): array
-    {
-        return $this->validator->fails($json);
     }
 }

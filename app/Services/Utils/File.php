@@ -6,15 +6,41 @@ use Slim\Http\UploadedFile;
 
 final class File
 {
+    /** @var string $pathFile */
+    private $pathUpload = __DIR__ . '/../../public/assets';
+
     /** @var UploadedFile $uploadedFile */
     private $uploadedFile;
 
-    /** @var string $pathFile */
-    private $pathUpload = __DIR__ . "/../../public/assets";
-
+    /**
+     * @param UploadedFile $uploadedFile
+     */
     public function __construct(UploadedFile $uploadedFile)
     {
         $this->uploadedFile = $uploadedFile;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function data(): ?array
+    {
+        return [
+            'file_name' => $this->filename(),
+            'size'      => $this->size(),
+            'mime'      => $this->mimeType(),
+            'extension' => $this->extension(),
+            'stream'    => $this->stream(),
+        ];
+    }
+
+    /**
+     * @param string $path
+     * @return boolean
+     */
+    public function delete(string $path): bool
+    {
+        return unlink("{$this->pathUpload}/{$path}");
     }
 
     /**
@@ -23,6 +49,22 @@ final class File
     public function extension(): ?string
     {
         return pathinfo($this->uploadedFile->getClientFilename(), PATHINFO_EXTENSION);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function fileName(): ?string
+    {
+        return $this->uploadedFile->getClientFilename() ?? null;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getError(): int
+    {
+        return $this->uploadedFile->getError();
     }
 
     /**
@@ -42,11 +84,15 @@ final class File
     }
 
     /**
-     * @return string|null
+     * @param string|null $path
+     * @param string|null $newFileName
+     * @return void
      */
-    public function fileName(): ?string
-    {
-        return $this->uploadedFile->getClientFilename() ?? null;
+    public function store(
+        ?string $path = null,
+        ?string $newFileName = null
+    ): void {
+        $this->uploadedFile->moveTo($this->pathUpload . ("/{$path}" ?: null) . ("/{$newFileName}" ?: "/{$this->fileName()}"));
     }
 
     /**
@@ -55,46 +101,5 @@ final class File
     public function stream(): ?object
     {
         return $this->uploadedFile->getStream();
-    }
-
-    /**
-     * @param string|null $path
-     * @param string|null $newFileName
-     * @return void
-     */
-    public function store(?string $path = null, ?string $newFileName = null): void
-    {
-        $this->uploadedFile->moveTo($this->pathUpload . ("/{$path}" ?: null) . ("/{$newFileName}" ?: "/{$this->fileName()}"));
-    }
-
-    /**
-     * @param string $path
-     * @return boolean
-     */
-    public function delete(string $path): bool
-    {
-        return unlink("{$this->pathUpload}/{$path}");
-    }
-
-    /**
-     * @return array|null
-     */
-    public function data(): ?array
-    {
-        return [
-            'file_name' => $this->filename(),
-            'size'      => $this->size(),
-            'mime'      => $this->mimeType(),
-            'extension' => $this->extension(),
-            'stream'    => $this->stream(),
-        ];
-    }
-
-    /**
-     * @return integer
-     */
-    public function getError(): int
-    {
-        return $this->uploadedFile->getError();
     }
 }
