@@ -25,7 +25,6 @@
         "slim/php-view": "^2.2",
         "tuupola/cors-middleware": "^1.1",
         "tuupola/slim-jwt-auth": "^3.4",
-        "pusher/pusher-php-server": "^4.1",
         "nesbot/carbon": "^2.30",
         "league/event": "^2.2",
         "ailtonloures/validator": "^1.2"

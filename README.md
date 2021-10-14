@@ -12,7 +12,6 @@ Estrutura inicial para projetos desenvolvidos em PHP.
 - Events e Listeners - [League](https://event.thephpleague.com/2.0/)
 - Mailer - [PHPMailer](https://github.com/PHPMailer/PHPMailer)
 - Validator - [Documentação](https://github.com/ailtonloures/validator)
-- Notification - [Pusher](https://github.com/pusher/pusher-http-php)
 - Template Enginer - [PHP-View](https://github.com/slimphp/PHP-View)
 - Carbon - [Documentação](https://carbon.nesbot.com/docs/)
 - Tests - [Pest](https://pestphp.com/)
