@@ -32,7 +32,7 @@ Com o composer instalado na sua máquina, execute o comando abaixo:
 composer create-project --prefer-dist --stability dev ailtonloures/skeleton [app_name]
 ```
 
-## Usar
+## Iniciando projeto
 
 Após ter realizado todas as configurações acima, suba o seu servidor apache (XAMPP, WAMPP, etc...) ou execute o comando a seguir na raiz do seu projeto.
 A porta pode ser de sua preferência ou a porta que estiver disponível em seu servidor, mas por padrão, será a porta 80.
